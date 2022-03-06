@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": false,
+        "amount": 30
+    },
+    "auditLog": "/Users/limkeunhyeok/Desktop/express-api-server-sample-ts/src/logs/debug/.580cd278af4509a7c9f98ed8b9052990aa829397-audit.json",
+    "files": [
+        {
+            "date": 1646567107615,
+            "name": "/Users/limkeunhyeok/Desktop/express-api-server-sample-ts/src/logs/debug/2022-03-06.log",
+            "hash": "35b5aee235d9da27cf5018e62f3ac3f8"
+        }
+    ],
+    "hashType": "md5"
+}

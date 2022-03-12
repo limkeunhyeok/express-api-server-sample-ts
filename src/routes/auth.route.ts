@@ -17,5 +17,6 @@ export default class AuthRoute implements Routes {
     router
       .post("/signUp", wrap(this.authController.signUp))
       .post("/signIn", wrap(this.authController.signIn))
+    this.router.use(this.path, router);
   }
 }

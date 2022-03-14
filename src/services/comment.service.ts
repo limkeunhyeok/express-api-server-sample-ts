@@ -5,7 +5,7 @@ import { CreateCommentDto } from "@dtos/comment.dto";
 import PostModel from "@/models/post.model";
 import { UnauthorizedException } from "@/exceptions/unauthorized.exception";
 
-export default class CategoryService {
+export default class CommentService {
   public Comment = CommentModel;
   public Post = PostModel;
 

@@ -1,9 +1,9 @@
 import UserModel from "@models/user.model";
 import { User } from "@interfaces/user.interface";
 import { hash, compare } from "bcrypt";
-import { CreateUserDto, UpdateUserDto } from "@dtos/user.dto";
+import { CreateUserDto } from "@dtos/user.dto";
 import { BadRequestException } from "@exceptions/bad-request.exception";
-import { create, verfiy, JwtPayload } from "@/lib/jwt";
+import { create, JwtPayload } from "@/lib/jwt";
 
 export default class AuthService {
   public User = UserModel;
@@ -30,7 +30,8 @@ export default class AuthService {
     const isValidPassword = await compare(userData.password, user.password);
     if (!isValidPassword) throw new BadRequestException("Email or password is incorrect.");
 
-    const token = create({ userId: user._id, nick: user.nick });
+    const payload: JwtPayload = { id: user._id, nick: user.nick };
+    const token = create(payload);
     return token;
   }
 }

@@ -8,6 +8,7 @@ import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from "@/config";
 import { Routes } from "@/interfaces/routes.interface";
 import { logger, stream } from "@/lib/logger";
 import errorMiddleware from "./middlewares/error.middleware";
+import authMiddleware from "./middlewares/auth.middleware";
 
 export default class App {
   public app: express.Application;
@@ -38,11 +39,12 @@ export default class App {
   }
 
   private initializeMiddlewares() {
-    this.app.use(morgan(LOG_FORMAT, { stream }));
-    this.app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
-    this.app.use(helmet());
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
+    this.app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
+    this.app.use(helmet());
+    this.app.use(morgan(LOG_FORMAT, { stream }));
+    this.app.use(authMiddleware);
   }
 
   private initializeRoutes(routes: Routes[]) {

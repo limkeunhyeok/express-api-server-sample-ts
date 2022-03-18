@@ -1,5 +1,12 @@
 import { DB_HOST, DB_PORT, DB_DATABASE } from "@/config";
-import mongoose from "mongoose";
+import mongoose, { Connection } from "mongoose";
+
+export const getConnection = async () => {
+  const connection: Connection = await mongoose.createConnection(`mongodb://${DB_HOST}/${DB_PORT}/${DB_DATABASE}`, {
+    dbName: "api-sample-ts-test"
+  });
+  return connection
+}
 
 export const connectToDatabase = async () => {
   mongoose
@@ -9,5 +16,9 @@ export const connectToDatabase = async () => {
   
   mongoose.connection
     .on("error", console.error)
-    .on("disconnected", connectToDatabase)
+    // .on("disconnected", connectToDatabase)
+}
+
+export const closeDatabase = async (connection: Connection) => {
+  await connection.close();
 }

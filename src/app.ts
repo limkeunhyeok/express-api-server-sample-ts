@@ -48,6 +48,8 @@ export default class App {
   }
 
   private initializeRoutes(routes: Routes[]) {
+    this.app.get("/", (req, res) => res.send("ok"));
+    
     routes.forEach(route => {
       this.app.use("/api", route.router);
     })

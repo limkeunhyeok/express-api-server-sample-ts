@@ -6,6 +6,7 @@ import CategoryRoute from "../../src/routes/category.route";
 import PostRoute from "../../src/routes/post.route";
 import CommentRoute from "../../src/routes/comment.route";
 import { User } from "../../src/interfaces/user.interface";
+import { createUser, mockUserRaw } from "./mockup";
 
 export interface Headers {
   token?: string;
@@ -93,3 +94,31 @@ export function getResponseData(res: Response) {
     return body;
   }
 }
+
+export async function fetchUserTokenAndHeaders(
+  req: request.SuperTest<request.Test>,
+  userRaw: User = mockUserRaw(),
+) {
+  await createUser(userRaw);
+
+  const headers = await fetchHeaders(req);
+  const withHeaders = withHeadersBy(headers);
+
+  const params = {
+    email: userRaw.email,
+    password: userRaw.password
+  };
+
+  const res = await withHeaders(req.post("/api/auth/signIn"))
+    .send(params)
+    .expect(200);
+
+  const resData = getResponseData(res);
+  const token = resData.token;
+  const headersWithToken = getHeadersFrom(res, {
+    ...headers,
+    token,
+  });
+  return headersWithToken;
+}
+

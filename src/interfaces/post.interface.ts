@@ -1,5 +1,7 @@
+import { ObjectId } from "mongoose";
+
 export interface Post {
-  _id: string;
+  _id: ObjectId | string;
   userId: string;
   categoryId: string;
   title: string;

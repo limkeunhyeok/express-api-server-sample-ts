@@ -1,5 +1,5 @@
 import { model, Schema, Document } from "mongoose";
-import { Category } from "@interfaces/category.interface";
+import { Category } from "../interfaces/category.interface";
 
 const categorySchema: Schema = new Schema({
   title: {

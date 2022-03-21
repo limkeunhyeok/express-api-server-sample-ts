@@ -1,6 +1,6 @@
-import { CreateCommentDto } from "@dtos/comment.dto";
-import { Comment } from "@interfaces/comment.interface";
-import CommentService from "@services/comment.service";
+import { CreateCommentDto } from "../dtos/comment.dto";
+import { Comment } from "../interfaces/comment.interface";
+import CommentService from "../services/comment.service";
 import { Handler } from "express";
 
 export default class CommentController {

@@ -4,9 +4,9 @@ import helmet from "helmet";
 import morgan from "morgan";
 import { connectToDatabase } from "./lib/database";
 import { set } from "mongoose";
-import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from "@/config";
-import { Routes } from "@/interfaces/routes.interface";
-import { logger, stream } from "@/lib/logger";
+import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from "./config";
+import { Routes } from "@interfaces/routes.interface";
+import { logger, stream } from "./lib/logger";
 import errorMiddleware from "./middlewares/error.middleware";
 import authMiddleware from "./middlewares/auth.middleware";
 

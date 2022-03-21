@@ -1,6 +1,6 @@
-import PostController from "@controllers/post.controller";
-import { wrap } from "@/lib/wrap";
-import { Routes } from "@interfaces/routes.interface";
+import PostController from "../controllers/post.controller";
+import { wrap } from "../lib/wrap";
+import { Routes } from "../interfaces/routes.interface";
 import { Router } from "express";
 
 export default class PostRoute implements Routes {

@@ -1,0 +1,20 @@
+{
+    "keep": {
+        "days": false,
+        "amount": 30
+    },
+    "auditLog": "/Users/limkeunhyeok/Desktop/express-api-server-sample-ts/src/logs/debug/.580cd278af4509a7c9f98ed8b9052990aa829397-audit.json",
+    "files": [
+        {
+            "date": 1647784903769,
+            "name": "/Users/limkeunhyeok/Desktop/express-api-server-sample-ts/src/logs/debug/2022-03-20.log",
+            "hash": "8f575f0b05a44ed16dd00b8e5a87ce7a"
+        },
+        {
+            "date": 1647861204776,
+            "name": "/Users/limkeunhyeok/Desktop/express-api-server-sample-ts/src/logs/debug/2022-03-21.log",
+            "hash": "1c93d1e3a395aa131a4fa9989d1e501e"
+        }
+    ],
+    "hashType": "md5"
+}

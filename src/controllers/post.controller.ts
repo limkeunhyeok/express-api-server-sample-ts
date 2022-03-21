@@ -1,6 +1,6 @@
-import { CreatePostDto, UpdatePostDto } from "@dtos/post.dto";
-import { Post } from "@interfaces/post.interface";
-import PostService from "@services/post.service";
+import { CreatePostDto, UpdatePostDto } from "../dtos/post.dto";
+import { Post } from "../interfaces/post.interface";
+import PostService from "../services/post.service";
 import { Handler } from "express";
 
 export default class PostController {

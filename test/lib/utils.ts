@@ -32,7 +32,7 @@ export function expectResponseSucceed(res: Response) {
   if (isApiResponse(data)) {
     expect(data.success).toBe(true);
     expect(data.response).not.toBeNull();
-    expect(data.error).toBeNull();
+    expect(data.error).toBeUndefined();
   } else {
     expect(data).not.toBeNull();
   }
@@ -42,7 +42,7 @@ export function expectResponseFailed(res: Response) {
   const data = res.body;
   if (isApiResponse(data)) {
     expect(data.success).toBe(true);
-    expect(data.response).toBeNull();
+    expect(data.response).toBeUndefined();
     expect(data.error).not.toBeNull();
   } else {
     expect(typeof data.status).toBe("number");
@@ -67,7 +67,7 @@ export function getHeadersFrom(res: Response, headers: Headers = {}): Headers {
 }
 
 export async function fetchHeaders(req: request.SuperTest<request.Test>) {
-  const res = await req.get("/api").expect(200);
+  const res = await req.get("/").expect(200);
   return getHeadersFrom(res);
 }
 

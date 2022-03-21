@@ -1,4 +1,4 @@
-import { DB_HOST, DB_PORT, DB_DATABASE } from "@/config";
+import { DB_HOST, DB_PORT, DB_DATABASE } from "../config";
 import mongoose, { Connection } from "mongoose";
 
 export const getConnection = async () => {

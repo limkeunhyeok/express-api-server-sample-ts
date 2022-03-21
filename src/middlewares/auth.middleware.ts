@@ -1,5 +1,5 @@
-import { UnauthorizedException } from "@exceptions/unauthorized.exception";
-import { verify } from "@/lib/jwt";
+import { UnauthorizedException } from "../exceptions/unauthorized.exception";
+import { verify } from "../lib/jwt";
 import { Handler } from "express";
 
 const authMiddleware: Handler = (req, res, next) => {

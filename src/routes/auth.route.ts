@@ -1,6 +1,6 @@
-import AuthController from "@/controllers/auth.controller";
-import { wrap } from "@/lib/wrap";
-import { Routes } from "@interfaces/routes.interface";
+import AuthController from "../controllers/auth.controller";
+import { wrap } from "../lib/wrap";
+import { Routes } from "../interfaces/routes.interface";
 import { Router } from "express";
 
 export default class AuthRoute implements Routes {

@@ -1,6 +1,6 @@
-import { CreateCategoryDto, UpdateCategoryDto } from "@dtos/category.dto";
-import { Category } from "@interfaces/category.interface";
-import CategoryService from "@services/category.service";
+import { CreateCategoryDto, UpdateCategoryDto } from "../dtos/category.dto";
+import { Category } from "../interfaces/category.interface";
+import CategoryService from "../services/category.service";
 import { Handler } from "express";
 
 export default class CategoryController {

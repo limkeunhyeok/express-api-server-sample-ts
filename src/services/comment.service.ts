@@ -1,9 +1,9 @@
-import { Comment } from "@interfaces/comment.interface";
-import { BadRequestException } from "@exceptions/bad-request.exception";
-import CommentModel from "@models/comment.model";
-import { CreateCommentDto } from "@dtos/comment.dto";
-import PostModel from "@/models/post.model";
-import { UnauthorizedException } from "@/exceptions/unauthorized.exception";
+import { Comment } from "../interfaces/comment.interface";
+import { BadRequestException } from "../exceptions/bad-request.exception";
+import CommentModel from "../models/comment.model";
+import { CreateCommentDto } from "../dtos/comment.dto";
+import PostModel from "../models/post.model";
+import { UnauthorizedException } from "../exceptions/unauthorized.exception";
 
 export default class CommentService {
   public Comment = CommentModel;

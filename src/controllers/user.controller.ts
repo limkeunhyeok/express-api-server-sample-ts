@@ -1,6 +1,6 @@
-import { CreateUserDto, UpdateUserDto } from "@/dtos/user.dto";
-import { User } from "@interfaces/user.interface";
-import UserService from "@services/user.service";
+import { CreateUserDto, UpdateUserDto } from "../dtos/user.dto";
+import { User } from "../interfaces/user.interface";
+import UserService from "../services/user.service";
 import { Handler } from "express";
 
 export default class AuthController {

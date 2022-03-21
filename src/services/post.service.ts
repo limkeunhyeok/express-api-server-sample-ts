@@ -1,8 +1,8 @@
 import shortid from "shortid";
-import { CreatePostDto, UpdatePostDto } from "@dtos/post.dto";
-import { Post } from "@interfaces/post.interface";
-import PostModel from "@models/post.model";
-import { BadRequestException } from "@exceptions/bad-request.exception";
+import { CreatePostDto, UpdatePostDto } from "../dtos/post.dto";
+import { Post } from "../interfaces/post.interface";
+import PostModel from "../models/post.model";
+import { BadRequestException } from "../exceptions/bad-request.exception";
 
 export default class PostService {
   public Post = PostModel;

@@ -1,6 +1,6 @@
-import { CreateUserDto } from "@/dtos/user.dto";
-import { User } from "@/interfaces/user.interface";
-import AuthService from "@/services/auth.service";
+import { CreateUserDto } from "../dtos/user.dto";
+import { User } from "../interfaces/user.interface";
+import AuthService from "../services/auth.service";
 import { Handler } from "express";
 
 export default class AuthController {
@@ -14,7 +14,7 @@ export default class AuthController {
 
   public signIn: Handler = async (req, res, next) => {
     const userData: CreateUserDto = { ...req.body };
-    const token: string = await this.authService.signIn(userData);
+    const token: object = await this.authService.signIn(userData);
     return token
   }  
 }

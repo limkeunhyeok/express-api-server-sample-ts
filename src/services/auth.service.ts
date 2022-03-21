@@ -1,9 +1,9 @@
-import UserModel from "@models/user.model";
-import { User } from "@interfaces/user.interface";
+import UserModel from "../models/user.model";
+import { User } from "../interfaces/user.interface";
 import { hash, compare } from "bcrypt";
-import { CreateUserDto } from "@dtos/user.dto";
-import { BadRequestException } from "@exceptions/bad-request.exception";
-import { create, JwtPayload } from "@/lib/jwt";
+import { CreateUserDto } from "../dtos/user.dto";
+import { BadRequestException } from "../exceptions/bad-request.exception";
+import { create, JwtPayload } from "../lib/jwt";
 
 export default class AuthService {
   public User = UserModel;
@@ -23,7 +23,7 @@ export default class AuthService {
     return createdUserData;
   }
 
-  public async signIn(userData: CreateUserDto): Promise<string> {
+  public async signIn(userData: CreateUserDto): Promise<object> {
     const user: User = await this.User.findOne({ email: userData.email });
     if (!user) throw new BadRequestException("Email or password is incorrect.");
 
@@ -32,6 +32,6 @@ export default class AuthService {
 
     const payload: JwtPayload = { id: user._id.toString(), nick: user.nick };
     const token = create(payload);
-    return token;
+    return { token };
   }
 }

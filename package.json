@@ -50,7 +50,9 @@
     "dev": "cross-env NODE_ENV=development nodemon",
     "build": "tsc && tsc-alias",
     "build:swc": "swc src -d dist --source-maps --copy-files",
-    "test": "jest --forceExit --detectOpenHandles",
+    "test": "jest",
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:e2e:result": "npm run test:e2e -- --verbose --noStackTrace 2>&1 | grep -v '●' | grep -ve '[Ee]xpected' | grep -v 'npm' | grep -v 'Received' | grep -ve '^$'",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
     "lint:fix": "npm run lint -- --fix",
     "deploy:prod": "npm run build && pm2 start ecosystem.config.js --only prod",
@@ -58,5 +60,20 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "testEnvironment": "node"
+  }
 }

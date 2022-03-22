@@ -2,3 +2,45 @@
 2022-03-21 20:13:25 info: [0mPOST /api/auth/signUp [32m200[0m 153.322 ms - 262[0m
 2022-03-21 20:13:25 info: [0mGET / [32m200[0m 0.266 ms - 2[0m
 2022-03-21 20:13:25 info: [0mPOST /api/auth/signIn [32m200[0m 87.369 ms - 227[0m
+2022-03-21 20:21:56 info: [0mGET / [32m200[0m 1.966 ms - 2[0m
+2022-03-21 20:21:57 info: [0mPOST /api/auth/signUp [32m200[0m 133.225 ms - 267[0m
+2022-03-21 20:21:57 info: [0mGET / [32m200[0m 0.239 ms - 2[0m
+2022-03-21 20:21:57 error: [POST] /api/auth/signUp >> StatusCode:: 500, Message:: User validation failed: email: Path `email` is required.
+2022-03-21 20:21:57 info: [0mPOST /api/auth/signUp [31m500[0m 84.576 ms - 70[0m
+2022-03-21 20:21:57 info: [0mGET / [32m200[0m 0.326 ms - 2[0m
+2022-03-21 20:21:57 info: [0mPOST /api/auth/signIn [32m200[0m 84.635 ms - 229[0m
+2022-03-21 20:23:24 info: [0mGET / [32m200[0m 2.535 ms - 2[0m
+2022-03-21 20:23:24 info: [0mPOST /api/auth/signUp [32m200[0m 134.594 ms - 271[0m
+2022-03-21 20:23:24 info: [0mGET / [32m200[0m 0.227 ms - 2[0m
+2022-03-21 20:23:24 error: [POST] /api/auth/signUp >> StatusCode:: 500, Message:: User validation failed: email: Path `email` is required.
+2022-03-21 20:23:24 info: [0mPOST /api/auth/signUp [31m500[0m 97.295 ms - 70[0m
+2022-03-21 20:23:24 info: [0mGET / [32m200[0m 0.231 ms - 2[0m
+2022-03-21 20:23:24 info: [0mPOST /api/auth/signIn [32m200[0m 85.249 ms - 232[0m
+2022-03-21 22:11:49 info: [0mGET / [32m200[0m 2.051 ms - 2[0m
+2022-03-21 22:11:49 info: [0mPOST /api/auth/signUp [32m200[0m 133.174 ms - 265[0m
+2022-03-21 22:11:49 info: [0mGET / [32m200[0m 0.275 ms - 2[0m
+2022-03-21 22:11:49 error: [POST] /api/auth/signUp >> StatusCode:: 500, Message:: User validation failed: email: Path `email` is required.
+2022-03-21 22:11:49 info: [0mPOST /api/auth/signUp [31m500[0m 92.872 ms - 70[0m
+2022-03-21 22:11:49 info: [0mGET / [32m200[0m 0.226 ms - 2[0m
+2022-03-21 22:11:49 info: [0mPOST /api/auth/signIn [32m200[0m 102.051 ms - 232[0m
+2022-03-21 22:21:54 info: [0mGET / [32m200[0m 2.270 ms - 2[0m
+2022-03-21 22:21:54 info: [0mPOST /api/auth/signUp [32m200[0m 143.328 ms - 262[0m
+2022-03-21 22:21:54 info: [0mGET / [32m200[0m 0.235 ms - 2[0m
+2022-03-21 22:21:54 error: [POST] /api/auth/signUp >> StatusCode:: 400, Message:: email must be an email
+2022-03-21 22:21:54 info: [0mPOST /api/auth/signUp [33m400[0m 7.423 ms - 36[0m
+2022-03-21 22:21:54 info: [0mGET / [32m200[0m 0.239 ms - 2[0m
+2022-03-21 22:21:54 info: [0mPOST /api/auth/signIn [32m200[0m 87.795 ms - 235[0m
+2022-03-21 22:23:57 info: [0mGET / [32m200[0m 2.020 ms - 2[0m
+2022-03-21 22:23:57 info: [0mPOST /api/auth/signUp [32m200[0m 144.829 ms - 273[0m
+2022-03-21 22:23:57 info: [0mGET / [32m200[0m 0.217 ms - 2[0m
+2022-03-21 22:23:57 error: [POST] /api/auth/signUp >> StatusCode:: 400, Message:: email must be an email
+2022-03-21 22:23:57 info: [0mPOST /api/auth/signUp [33m400[0m 2.166 ms - 36[0m
+2022-03-21 22:23:57 info: [0mGET / [32m200[0m 0.224 ms - 2[0m
+2022-03-21 22:23:57 info: [0mPOST /api/auth/signIn [32m200[0m 85.096 ms - 225[0m
+2022-03-21 22:24:34 info: [0mGET / [32m200[0m 1.980 ms - 2[0m
+2022-03-21 22:24:34 info: [0mPOST /api/auth/signUp [32m200[0m 162.350 ms - 273[0m
+2022-03-21 22:24:34 info: [0mGET / [32m200[0m 0.336 ms - 2[0m
+2022-03-21 22:24:34 error: [POST] /api/auth/signUp >> StatusCode:: 400, Message:: email must be an email
+2022-03-21 22:24:34 info: [0mPOST /api/auth/signUp [33m400[0m 2.058 ms - 36[0m
+2022-03-21 22:24:34 info: [0mGET / [32m200[0m 0.212 ms - 2[0m
+2022-03-21 22:24:35 info: [0mPOST /api/auth/signIn [32m200[0m 88.814 ms - 237[0m

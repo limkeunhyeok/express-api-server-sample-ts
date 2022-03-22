@@ -47,8 +47,85 @@ describe("Auth API (e2e)", () => {
       expect(result).toHaveProperty('nick', userRaw.nick);
       expect(result).toHaveProperty('createdAt');
       expect(result).toHaveProperty('updatedAt');
-    })
-  })
+    });
+
+    it("failed - bad request (400) # requied email", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+
+      const userRaw = mockUserRaw();
+      const params = {
+        password: userRaw.password,
+        nick: userRaw.nick,
+      };
+
+      // when
+      const res = await withHeaders(req.post(apiPath).send(params).expect(400));
+
+      // then
+      expect(isApiResponse(res.body)).toBe(true);
+      expectResponseFailed(res);
+    });
+    
+    it("failed - bad request (400) # requied password", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+
+      const userRaw = mockUserRaw();
+      const params = {
+        email: userRaw.email,
+        nick: userRaw.nick,
+      };
+
+      // when
+      const res = await withHeaders(req.post(apiPath).send(params).expect(400));
+
+      // then
+      expect(isApiResponse(res.body)).toBe(true);
+      expectResponseFailed(res);
+    });
+    
+    it("failed - bad request (400) # requied nick", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+
+      const userRaw = mockUserRaw();
+      const params = {
+        email: userRaw.email,
+        password: userRaw.password,
+      };
+
+      // when
+      const res = await withHeaders(req.post(apiPath).send(params).expect(400));
+
+      // then
+      expect(isApiResponse(res.body)).toBe(true);
+      expectResponseFailed(res);
+    });
+    
+    it("failed - bad request (400) # invalid email", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+
+      const userRaw = mockUserRaw();
+      const params = {
+        email: "example",
+        password: userRaw.password,
+        nick: userRaw.nick
+      };
+
+      // when
+      const res = await withHeaders(req.post(apiPath).send(params).expect(400));
+
+      // then
+      expect(isApiResponse(res.body)).toBe(true);
+      expectResponseFailed(res);
+    });
+  });
 
   describe("POST /api/auth/signIn", () => {
     const apiPath = `${rootApiPath}/signIn`;

@@ -1,7 +1,7 @@
 export class Response {
   public success: boolean
   public response?: any
-  public err?: Error
+  public message?: string
   
   constructor(success: boolean) {
     this.success = success;
@@ -12,8 +12,8 @@ export class Response {
     return this;
   }
 
-  public error(error: Error) {
-    this.err = error;
+  public error(message: string) {
+    this.message = message;
     return this;
   }
 
@@ -21,7 +21,7 @@ export class Response {
     return {
       success: this.success,
       response: this.response,
-      error: this.err
+      error: this.message
     }
   }
 }

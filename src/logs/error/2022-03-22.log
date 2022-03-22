@@ -1,0 +1,14 @@
+2022-03-22 22:34:21 error: [POST] /api/auth/signUp >> StatusCode:: 400, Message:: email must be an email
+2022-03-22 22:38:10 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: email must be an email
+2022-03-22 22:39:43 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: email must be an email
+2022-03-22 22:40:46 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: email must be an email
+2022-03-22 22:42:29 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: email must be an email
+2022-03-22 22:44:17 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: email must be an email
+2022-03-22 22:44:17 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: password must be a string,password must be longer than or equal to 8 characters
+2022-03-22 22:45:14 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: email must be an email
+2022-03-22 22:45:14 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: password must be a string,password must be longer than or equal to 8 characters
+2022-03-22 22:45:14 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: nick must be a string
+2022-03-22 22:46:29 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: email must be an email
+2022-03-22 22:46:29 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: password must be a string,password must be longer than or equal to 8 characters
+2022-03-22 22:46:29 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: nick must be a string
+2022-03-22 22:46:29 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: email must be an email

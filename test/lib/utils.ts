@@ -41,7 +41,7 @@ export function expectResponseSucceed(res: Response) {
 export function expectResponseFailed(res: Response) {
   const data = res.body;
   if (isApiResponse(data)) {
-    expect(data.success).toBe(true);
+    expect(data.success).toBe(false);
     expect(data.response).toBeUndefined();
     expect(data.error).not.toBeNull();
   } else {

@@ -2,6 +2,8 @@ import UserController from "../controllers/user.controller";
 import { wrap } from "../lib/wrap";
 import { Routes } from "../interfaces/routes.interface";
 import { Router } from "express";
+import validationMiddleware from "../middlewares/validation.middleware";
+import { CreateUserDto, UpdateUserDto } from "../dtos/user.dto";
 
 export default class UserRoute implements Routes {
   public path = "/users";

@@ -125,6 +125,46 @@ describe("Auth API (e2e)", () => {
       expect(isApiResponse(res.body)).toBe(true);
       expectResponseFailed(res);
     });
+    
+    it("failed - bad request (400) # invalid password - to short", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+
+      const userRaw = mockUserRaw();
+      const params = {
+        email: userRaw.email,
+        password: "1234567",
+        nick: userRaw.nick
+      };
+
+      // when
+      const res = await withHeaders(req.post(apiPath).send(params).expect(400));
+
+      // then
+      expect(isApiResponse(res.body)).toBe(true);
+      expectResponseFailed(res);
+    });
+    
+    it("failed - bad request (400) # invalid password - to long", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+
+      const userRaw = mockUserRaw();
+      const params = {
+        email: userRaw.email,
+        password: "12345678901234567",
+        nick: userRaw.nick
+      };
+
+      // when
+      const res = await withHeaders(req.post(apiPath).send(params).expect(400));
+
+      // then
+      expect(isApiResponse(res.body)).toBe(true);
+      expectResponseFailed(res);
+    });
   });
 
   describe("POST /api/auth/signIn", () => {
@@ -154,6 +194,42 @@ describe("Auth API (e2e)", () => {
       const decoded = verify(result.token);
       expect(decoded).toHaveProperty('id', userRaw._id);
       expect(decoded).toHaveProperty('nick', userRaw.nick);
-    })
-  })
-})
+    });
+
+    it("failed - bad request (400) # requied email", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+
+      const userRaw = mockUserRaw();
+      const params = {
+        password: userRaw.password,
+      };
+
+      // when
+      const res = await withHeaders(req.post(apiPath).send(params).expect(400));
+
+      // then
+      expect(isApiResponse(res.body)).toBe(true);
+      expectResponseFailed(res);
+    });
+    
+    it("failed - bad request (400) # requied password", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+
+      const userRaw = mockUserRaw();
+      const params = {
+        password: userRaw.password,
+      };
+
+      // when
+      const res = await withHeaders(req.post(apiPath).send(params).expect(400));
+
+      // then
+      expect(isApiResponse(res.body)).toBe(true);
+      expectResponseFailed(res);
+    });
+  });
+});

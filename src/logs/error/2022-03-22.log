@@ -12,3 +12,22 @@
 2022-03-22 22:46:29 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: password must be a string,password must be longer than or equal to 8 characters
 2022-03-22 22:46:29 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: nick must be a string
 2022-03-22 22:46:29 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: email must be an email
+2022-03-22 22:53:02 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: email must be an email
+2022-03-22 22:53:02 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: password must be a string,password must be longer than or equal to 8 characters
+2022-03-22 22:53:02 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: nick must be a string
+2022-03-22 22:53:02 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: email must be an email
+2022-03-22 22:53:02 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: password must be longer than or equal to 8 characters
+2022-03-22 22:54:06 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: email must be an email
+2022-03-22 22:54:06 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: password must be a string,password must be longer than or equal to 8 characters
+2022-03-22 22:54:06 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: nick must be a string
+2022-03-22 22:54:06 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: email must be an email
+2022-03-22 22:54:06 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: password must be longer than or equal to 8 characters
+2022-03-22 22:54:06 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: password must be shorter than or equal to 16 characters
+2022-03-22 22:55:19 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: email must be an email
+2022-03-22 22:55:19 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: password must be a string,password must be longer than or equal to 8 characters
+2022-03-22 22:55:19 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: nick must be a string
+2022-03-22 22:55:19 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: email must be an email
+2022-03-22 22:55:19 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: password must be longer than or equal to 8 characters
+2022-03-22 22:55:19 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: password must be shorter than or equal to 16 characters
+2022-03-22 22:55:19 error: POST /api/auth/signIn >> StatusCode:: 400, Message:: email must be an email
+2022-03-22 22:55:19 error: POST /api/auth/signIn >> StatusCode:: 400, Message:: email must be an email

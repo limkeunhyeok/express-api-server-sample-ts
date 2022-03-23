@@ -1,0 +1,28 @@
+2022-03-23 20:37:00 info: [0mGET / [32m200[0m 2.116 ms - 2[0m
+2022-03-23 20:37:00 info: [0mPOST /api/auth/signUp [32m200[0m 150.486 ms - 265[0m
+2022-03-23 20:37:00 info: [0mGET / [32m200[0m 0.220 ms - 2[0m
+2022-03-23 20:37:00 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: email must be an email
+2022-03-23 20:37:00 info: [0mPOST /api/auth/signUp [33m400[0m 2.220 ms - 50[0m
+2022-03-23 20:37:00 info: [0mGET / [32m200[0m 0.204 ms - 2[0m
+2022-03-23 20:37:00 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: password must be a string,password must be longer than or equal to 8 characters
+2022-03-23 20:37:00 info: [0mPOST /api/auth/signUp [33m400[0m 2.208 ms - 107[0m
+2022-03-23 20:37:00 info: [0mGET / [32m200[0m 0.286 ms - 2[0m
+2022-03-23 20:37:00 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: nick must be a string
+2022-03-23 20:37:00 info: [0mPOST /api/auth/signUp [33m400[0m 1.302 ms - 49[0m
+2022-03-23 20:37:00 info: [0mGET / [32m200[0m 0.205 ms - 2[0m
+2022-03-23 20:37:00 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: email must be an email
+2022-03-23 20:37:00 info: [0mPOST /api/auth/signUp [33m400[0m 1.134 ms - 50[0m
+2022-03-23 20:37:00 info: [0mGET / [32m200[0m 0.229 ms - 2[0m
+2022-03-23 20:37:00 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: password must be longer than or equal to 8 characters
+2022-03-23 20:37:00 info: [0mPOST /api/auth/signUp [33m400[0m 0.938 ms - 81[0m
+2022-03-23 20:37:00 info: [0mGET / [32m200[0m 0.198 ms - 2[0m
+2022-03-23 20:37:00 error: POST /api/auth/signUp >> StatusCode:: 400, Message:: password must be shorter than or equal to 16 characters
+2022-03-23 20:37:00 info: [0mPOST /api/auth/signUp [33m400[0m 0.887 ms - 83[0m
+2022-03-23 20:37:00 info: [0mGET / [32m200[0m 0.178 ms - 2[0m
+2022-03-23 20:37:00 info: [0mPOST /api/auth/signIn [32m200[0m 85.841 ms - 232[0m
+2022-03-23 20:37:00 info: [0mGET / [32m200[0m 0.229 ms - 2[0m
+2022-03-23 20:37:00 error: POST /api/auth/signIn >> StatusCode:: 400, Message:: email must be an email
+2022-03-23 20:37:00 info: [0mPOST /api/auth/signIn [33m400[0m 1.248 ms - 50[0m
+2022-03-23 20:37:00 info: [0mGET / [32m200[0m 0.203 ms - 2[0m
+2022-03-23 20:37:00 error: POST /api/auth/signIn >> StatusCode:: 400, Message:: email must be an email
+2022-03-23 20:37:00 info: [0mPOST /api/auth/signIn [33m400[0m 2.948 ms - 50[0m

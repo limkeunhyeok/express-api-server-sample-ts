@@ -19,6 +19,11 @@
             "date": 1647956060138,
             "name": "/Users/limkeunhyeok/Desktop/express-api-server-sample-ts/src/logs/error/2022-03-22.log",
             "hash": "d94a5d550a2c6479ce3302421ce456a5"
+        },
+        {
+            "date": 1648035419487,
+            "name": "/Users/limkeunhyeok/Desktop/express-api-server-sample-ts/src/logs/error/2022-03-23.log",
+            "hash": "5458b9087bc3fcb03187bfb9b8310b22"
         }
     ],
     "hashType": "md5"

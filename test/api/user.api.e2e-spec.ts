@@ -1,3 +1,4 @@
+import { ObjectID } from "bson";
 import request from "supertest";
 import { CreateUserDto } from "../../src/dtos/user.dto";
 import { verify } from "../../src/lib/jwt";
@@ -221,6 +222,167 @@ describe("User API (e2e)", () => {
       expect(result).toHaveProperty('nick');
       expect(result).toHaveProperty('createdAt');
       expect(result).toHaveProperty('updatedAt');
+    });
+    
+    it("failed - bad request (400) # non-existent user", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+
+      const userId = new ObjectID();
+
+      // when
+      const res = await withHeaders(req.get(`${apiPath}/${userId}`).expect(400));
+
+      // then
+      expect(isApiResponse(res.body)).toBe(true);
+      expectResponseFailed(res);
+    });
+  });
+  
+  describe("PUT /api/users/{id}", () => {
+    const apiPath = `${rootApiPath}`;
+    it("success - update one by id (200)", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+      
+      const user = await createUser();
+      const userId = user._id;
+
+      const userRaw = mockUserRaw();
+
+      const params = {
+        password: userRaw.password,
+        nick: userRaw.nick
+      }
+
+      // when
+      const res = await withHeaders(req.put(`${apiPath}/${userId}`).send(params).expect(200));
+
+      // then
+      expect(isApiResponse(res.body)).toBe(true);
+      expectResponseSucceed(res);
+
+      const result = getResponseData(res);
+      expect(result).toHaveProperty('_id');
+      expect(result).toHaveProperty('email');
+      expect(result).toHaveProperty('password');
+      expect(result).toHaveProperty('nick');
+      expect(result).toHaveProperty('createdAt');
+      expect(result).toHaveProperty('updatedAt');
+    });
+    
+    it("failed - bad request (400) # required password", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+
+      const user = await createUser();
+      const userId = user._id;
+
+      const userRaw = mockUserRaw();
+
+      const params = {
+        nick: userRaw.nick
+      }
+
+      // when
+      const res = await withHeaders(req.put(`${apiPath}/${userId}`).send(params).expect(400));
+
+      // then
+      expect(isApiResponse(res.body)).toBe(true);
+      expectResponseFailed(res);
+    });
+    
+    it("failed - bad request (400) # required nick", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+
+      const user = await createUser();
+      const userId = user._id;
+
+      const userRaw = mockUserRaw();
+
+      const params = {
+        password: userRaw.password,
+      }
+
+      // when
+      const res = await withHeaders(req.put(`${apiPath}/${userId}`).send(params).expect(400));
+
+      // then
+      expect(isApiResponse(res.body)).toBe(true);
+      expectResponseFailed(res);
+    });
+
+    it("failed - bad request (400) # non-existent user", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+
+      await createUser();      
+      const userRaw = mockUserRaw();
+      const userId = userRaw._id;
+
+      const params = {
+        password: userRaw.password,
+        nick: userRaw.nick
+      }
+
+      // when
+      const res = await withHeaders(req.put(`${apiPath}/${userId}`).send(params).expect(400));
+
+      // then
+      expect(isApiResponse(res.body)).toBe(true);
+      expectResponseFailed(res);
+    });
+  });
+
+  describe("DELETE /api/users/{id}", () => {
+    const apiPath = `${rootApiPath}`;
+    it("success - delete user by id (200)", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+      
+      const userRaw = mockUserRaw();
+      await createUser(userRaw);
+
+      const userId = userRaw._id;
+
+      // when
+      const res = await withHeaders(req.delete(`${apiPath}/${userId}`).expect(200));
+
+      // then
+      expect(isApiResponse(res.body)).toBe(true);
+      expectResponseSucceed(res);
+
+      const result = getResponseData(res);
+      expect(result).toHaveProperty('_id');
+      expect(result).toHaveProperty('email');
+      expect(result).toHaveProperty('password');
+      expect(result).toHaveProperty('nick');
+      expect(result).toHaveProperty('createdAt');
+      expect(result).toHaveProperty('updatedAt');
+    });
+    
+    it("failed - bad request (400) # non-existent user", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+
+      await createUser();
+
+      const userId = new ObjectID();
+
+      // when
+      const res = await withHeaders(req.delete(`${apiPath}/${userId}`).expect(400));
+
+      // then
+      expect(isApiResponse(res.body)).toBe(true);
+      expectResponseFailed(res);
     });
   });
 });

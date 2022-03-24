@@ -13,8 +13,11 @@ export default class UserService {
   }
 
   public async findUserById(userId: string): Promise<User> {
-    const user = await this.User.findOne({ _id: userId });
-    return user;
+    const hasUser = await this.User.findOne({ _id: userId });
+
+    if (!hasUser) throw new BadRequestException("The user does not exists.")
+    
+    return hasUser;
   }
 
   public async createUser(userData: CreateUserDto): Promise<User> {

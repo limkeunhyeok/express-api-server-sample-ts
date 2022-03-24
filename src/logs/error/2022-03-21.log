@@ -1,6 +1,0 @@
-2022-03-21 20:21:57 error: [POST] /api/auth/signUp >> StatusCode:: 500, Message:: User validation failed: email: Path `email` is required.
-2022-03-21 20:23:24 error: [POST] /api/auth/signUp >> StatusCode:: 500, Message:: User validation failed: email: Path `email` is required.
-2022-03-21 22:11:49 error: [POST] /api/auth/signUp >> StatusCode:: 500, Message:: User validation failed: email: Path `email` is required.
-2022-03-21 22:21:54 error: [POST] /api/auth/signUp >> StatusCode:: 400, Message:: email must be an email
-2022-03-21 22:23:57 error: [POST] /api/auth/signUp >> StatusCode:: 400, Message:: email must be an email
-2022-03-21 22:24:34 error: [POST] /api/auth/signUp >> StatusCode:: 400, Message:: email must be an email

@@ -1,6 +1,7 @@
+import { Connection } from "mongoose";
 import { getConnection, closeDatabase } from "../../src/lib/database"
 
-let connection;
+let connection: Connection | null = null;
 
 beforeEach(async () => {
   connection = await getConnection();

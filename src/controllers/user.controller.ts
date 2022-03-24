@@ -12,8 +12,8 @@ export default class AuthController {
   }
 
   public findOneById: Handler = async (req, res, next) => {
-    const params = { ...req.body };
-    const user: User = await this.userService.findUserById(params.userId);
+    const userId: string = req.params.id;
+    const user: User = await this.userService.findUserById(userId);
     return user;
   }
 

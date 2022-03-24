@@ -16,7 +16,7 @@ export const connectToDatabase = async () => {
   
   mongoose.connection
     .on("error", console.error)
-    // .on("disconnected", connectToDatabase)
+    .on("disconnected", connectToDatabase)
 }
 
 export const closeDatabase = async (connection: Connection) => {

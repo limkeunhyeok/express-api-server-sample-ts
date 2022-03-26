@@ -27,7 +27,7 @@ export function mockUserRaw(): User {
   }
 }
 
-export async function createUser(userRaw: User = mockUserRaw()) {
+export async function createUser(userRaw: User = mockUserRaw()): Promise<User> {
   const data = JSON.parse(JSON.stringify(userRaw));
   data.password = hashSync(data.password, 10);
   const user = await userModel.create(data);
@@ -43,7 +43,7 @@ export function mockCategoryRaw(): Category {
   }
 }
 
-export async function createCategory(categoryRaw: Category = mockCategoryRaw()) {
+export async function createCategory(categoryRaw: Category = mockCategoryRaw()): Promise<Category> {
   const data = JSON.parse(JSON.stringify(categoryRaw));
   const category = await categoryModel.create(data);
   return category;
@@ -60,4 +60,27 @@ export function mockPostRaw(user: User, category: Category): Post {
     createdAt: now,
     updatedAt: now,
   }
+}
+
+export async function createPost(postRaw: Post): Promise<Post> {
+  const data = JSON.parse(JSON.stringify(postRaw));
+  const post = await postModel.create(data);
+  return post
+}
+
+export function mockCommentRaw(user: User, post: Post): Comment {
+  const now = new Date().toISOString();
+  return {
+    _id: new ObjectID().toString(),
+    userId: user._id,
+    postId: post._id,
+    content: faker.lorem.sentence(),
+    createdAt: now,
+  }
+}
+
+export async function createComment(commentRaw: Comment): Promise<Comment> {
+  const data = JSON.parse(JSON.stringify(commentRaw));
+  const comment = await commentModel.create(commentRaw);
+  return comment;
 }

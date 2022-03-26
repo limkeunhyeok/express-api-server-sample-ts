@@ -2,8 +2,8 @@ import { ObjectId } from "mongoose";
 
 export interface Comment {
   _id: ObjectId | string;
-  userId: string;
-  postId: string;
+  userId: ObjectId | string;
+  postId: ObjectId | string;
   content: string;
-  createdAt: Date;
+  createdAt: string;
 }

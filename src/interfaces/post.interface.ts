@@ -2,11 +2,10 @@ import { ObjectId } from "mongoose";
 
 export interface Post {
   _id: ObjectId | string;
-  userId: string;
-  categoryId: string;
+  userId: ObjectId | string;
+  categoryId: ObjectId | string;
   title: string;
-  slug: string;
   content: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }

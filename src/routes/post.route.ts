@@ -17,9 +17,9 @@ export default class PostRoute implements Routes {
     router
       .post("/", wrap(this.postController.create))
       .get("/", wrap(this.postController.findAll))
-      .get("/:slug", wrap(this.postController.findOneBySlug))
-      .put("/:slug", wrap(this.postController.update))
-      .delete("/:slug", wrap(this.postController.delete))
+      .get("/:id", wrap(this.postController.findOneById))
+      .put("/:id", wrap(this.postController.update))
+      .delete("/:id", wrap(this.postController.delete))
     this.router.use(this.path, router);
   }
 }

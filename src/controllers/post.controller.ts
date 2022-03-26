@@ -11,27 +11,9 @@ export default class PostController {
     return posts;
   }
 
-  public findAllByUserId: Handler = async (req) => {
-    const userId: string = req.query.userId as any;
-    const posts: Post[] = await this.postService.findAllByUserId(userId);
-    return posts;
-  }
-
-  public findAllByCategoryId: Handler = async (req) => {
-    const categoryId = req.query.categoryId as any;
-    const posts: Post[] = await this.postService.findAllByCategoryId(categoryId);
-    return posts;
-  }
-
-  public findOneByPostId: Handler = async (req) => {
-    const postId: string = req.query.postId as any;
+  public findOneById: Handler = async (req) => {
+    const postId: string = req.params.id;
     const post: Post = await this.postService.findOneByPostId(postId);
-    return post;
-  }
-
-  public findOneBySlug: Handler = async (req) => {
-    const slug: string = req.params.slug;
-    const post: Post = await this.postService.findOneBySlug(slug);
     return post;
   }
 
@@ -42,14 +24,14 @@ export default class PostController {
   }
 
   public update: Handler = async (req) => {
-    const postId: string = req.query.postId as any;
+    const postId: string = req.params.id;
     const params: UpdatePostDto = { ...req.body };
     const post: Post = await this.postService.updatePost(postId, params);
     return post;
   }
 
   public delete: Handler = async (req) => {
-    const postId: string = req.query.postId as any;
+    const postId: string = req.params.id;
     const post: Post = await this.postService.deletePost(postId);
     return post;
   }

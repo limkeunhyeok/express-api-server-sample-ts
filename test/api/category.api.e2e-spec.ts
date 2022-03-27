@@ -59,4 +59,28 @@ describe("Category API (e2e)", () => {
       expectResponseFailed(res);
     });
   });
+
+  describe("GET /api/categories", () => {
+    const apiPath = `${rootApiPath}`;
+    it("success - find all (200)", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+
+      // when
+      const res = await withHeaders(req.get(apiPath).expect(200));
+
+      // then
+      expect(isApiResponse(res.body)).toBe(true);
+      expectResponseSucceed(res);
+
+      const result = getResponseData(res);
+      expect(Array.isArray(result)).toBe(true)
+      result.forEach((category) => {
+        expect(category).toHaveProperty('_id');
+        expect(category).toHaveProperty('title');
+        expect(category).toHaveProperty('createdAt');
+      });
+    });
+  });
 });

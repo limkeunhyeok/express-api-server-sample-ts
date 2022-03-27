@@ -17,12 +17,6 @@ export default class CategoryController {
     return category;
   }
 
-  public findOneByTitle: Handler = async (req) => {
-    const { title } = req.body;
-    const category: Category = await this.categoryService.findOneByTitle(title);
-    return category;
-  }
-
   public create: Handler = async (req) => {
     const params: CreateCategoryDto = { ...req.body };
     const category: Category = await this.categoryService.createCategory(params);

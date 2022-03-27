@@ -12,13 +12,11 @@ export default class CategoryService {
   }
 
   public async findOneByCategoryId(categoryId: string): Promise<Category> {
-    const category: Category = await this.Category.findOne({ _id: categoryId });
-    return category;
-  }
+    const hasCategory: Category = await this.Category.findOne({ _id: categoryId });
 
-  public async findOneByTitle(title: string): Promise<Category> {
-    const category: Category = await this.Category.findOne({ title });
-    return category;
+    if (!hasCategory) throw new BadRequestException("The category does not exists.")
+
+    return hasCategory;
   }
 
   public async createCategory(categoryData: CreateCategoryDto): Promise<Category> {

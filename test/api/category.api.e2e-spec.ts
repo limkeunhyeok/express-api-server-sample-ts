@@ -1,3 +1,4 @@
+import { ObjectID } from "bson";
 import request from "supertest";
 import { CreateCategoryDto } from "../../src/dtos";
 import { verify } from "../../src/lib/jwt";
@@ -81,6 +82,47 @@ describe("Category API (e2e)", () => {
         expect(category).toHaveProperty('title');
         expect(category).toHaveProperty('createdAt');
       });
+    });
+  });
+  
+  describe("GET /api/categories/{id}", () => {
+    const apiPath = `${rootApiPath}`;
+    it("success - find one by id (200)", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+
+      const categoryRaw = mockCategoryRaw();
+      await createCategory(categoryRaw);
+
+      const categoryId = categoryRaw._id;
+
+      // when
+      const res = await withHeaders(req.get(`${apiPath}/${categoryId}`).expect(200));
+
+      // then
+      expect(isApiResponse(res.body)).toBe(true);
+      expectResponseSucceed(res);
+
+      const result = getResponseData(res);
+      expect(result).toHaveProperty('_id');
+      expect(result).toHaveProperty('title');
+      expect(result).toHaveProperty('createdAt');
+    });
+    
+    it("failed - bad request (400) # non-existent category", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+      
+      const categoryId = new ObjectID();
+
+      // when
+      const res = await withHeaders(req.get(`${apiPath}/${categoryId}`).expect(400));
+
+      // then
+      expect(isApiResponse(res.body)).toBe(true);
+      expectResponseFailed(res);
     });
   });
 });

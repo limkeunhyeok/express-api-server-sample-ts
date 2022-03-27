@@ -126,7 +126,7 @@ describe("Category API (e2e)", () => {
     });
   });
 
-  describe("PUT /api/categories", () => {
+  describe("PUT /api/categories/{id}", () => {
     const apiPath = `${rootApiPath}`
     it("success - update category (200)", async() => {
       // given
@@ -194,4 +194,43 @@ describe("Category API (e2e)", () => {
       expectResponseFailed(res);
     })
   });
+
+  describe("DELETE /api/categories/{id}", () => {
+    const apiPath = `${rootApiPath}`;
+    it("success - delete category (200)", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+
+      const category = await createCategory();
+      const categoryId = category._id.toString();
+
+      // when
+      const res = await withHeaders(req.delete(`${apiPath}/${categoryId}`).expect(200));
+
+      // then
+      expect(isApiResponse(res.body)).toBe(true);
+      expectResponseSucceed(res);
+
+      const result = getResponseData(res);
+      expect(result).toHaveProperty('_id', categoryId);
+      expect(result).toHaveProperty('title');
+      expect(result).toHaveProperty('createdAt');
+    });
+
+    it("failed - bad request (400) # non-existent category", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+
+      const categoryId = new ObjectID();
+
+      // when
+      const res = await withHeaders(req.delete(`${apiPath}/${categoryId}`).expect(400));
+
+      // then
+      expect(isApiResponse(res.body)).toBe(true);
+      expectResponseFailed(res);
+    })
+  })
 });

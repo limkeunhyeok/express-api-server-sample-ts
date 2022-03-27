@@ -1,5 +1,5 @@
 import { model, Schema, Document } from "mongoose";
-import { Comment } from "../interfaces/comment.interface";
+import { Comment } from "../interfaces";
 
 const commentSchema: Schema = new Schema({
   userId: {

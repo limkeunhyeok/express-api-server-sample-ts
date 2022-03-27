@@ -1,6 +1,6 @@
 import CategoryController from "../controllers/category.controller";
 import { wrap } from "../lib/wrap";
-import { Routes } from "../interfaces/routes.interface";
+import { Routes } from "../interfaces";
 import { Router } from "express";
 
 export default class CategoryRoute implements Routes {

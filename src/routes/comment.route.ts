@@ -1,6 +1,6 @@
 import CommentController from "../controllers/comment.controller";
 import { wrap } from "../lib/wrap";
-import { Routes } from "../interfaces/routes.interface";
+import { Routes } from "../interfaces";
 import { Router } from "express";
 
 export default class CommentRoute implements Routes {

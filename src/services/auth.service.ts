@@ -1,8 +1,8 @@
 import UserModel from "../models/user.model";
-import { User } from "../interfaces/user.interface";
+import { User } from "../interfaces";
 import { hash, compare } from "bcrypt";
-import { CreateUserDto } from "../dtos/user.dto";
-import { BadRequestException } from "../exceptions/bad-request.exception";
+import { CreateUserDto } from "../dtos";
+import { BadRequestException } from "../exceptions";
 import { create, JwtPayload } from "../lib/jwt";
 
 export default class AuthService {

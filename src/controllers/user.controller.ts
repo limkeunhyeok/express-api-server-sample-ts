@@ -1,5 +1,5 @@
-import { CreateUserDto, UpdateUserDto } from "../dtos/user.dto";
-import { User } from "../interfaces/user.interface";
+import { CreateUserDto, UpdateUserDto } from "../dtos";
+import { User } from "../interfaces";
 import UserService from "../services/user.service";
 import { Handler } from "express";
 

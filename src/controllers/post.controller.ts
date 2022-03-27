@@ -1,5 +1,5 @@
-import { CreatePostDto, UpdatePostDto } from "../dtos/post.dto";
-import { Post } from "../interfaces/post.interface";
+import { CreatePostDto, UpdatePostDto } from "../dtos";
+import { Post } from "../interfaces";
 import PostService from "../services/post.service";
 import { Handler } from "express";
 

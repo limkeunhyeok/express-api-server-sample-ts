@@ -1,5 +1,5 @@
-import { CreateCategoryDto, UpdateCategoryDto } from "../dtos/category.dto";
-import { Category } from "../interfaces/category.interface";
+import { CreateCategoryDto, UpdateCategoryDto } from "../dtos";
+import { Category } from "../interfaces";
 import CategoryService from "../services/category.service";
 import { Handler } from "express";
 

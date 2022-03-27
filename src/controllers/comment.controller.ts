@@ -1,5 +1,5 @@
-import { CreateCommentDto } from "../dtos/comment.dto";
-import { Comment } from "../interfaces/comment.interface";
+import { CreateCommentDto } from "../dtos";
+import { Comment } from "../interfaces";
 import CommentService from "../services/comment.service";
 import { Handler } from "express";
 

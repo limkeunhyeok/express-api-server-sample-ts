@@ -1,9 +1,9 @@
 import AuthController from "../controllers/auth.controller";
 import { wrap } from "../lib/wrap";
-import { Routes } from "../interfaces/routes.interface";
+import { Routes } from "../interfaces";
 import { Router } from "express";
 import validationMiddleware from "../middlewares/validation.middleware";
-import { SignInDto, SignUpDto } from "../dtos/auth.dto";
+import { SignInDto, SignUpDto } from "../dtos";
 
 export default class AuthRoute implements Routes {
   public path = "/auth";

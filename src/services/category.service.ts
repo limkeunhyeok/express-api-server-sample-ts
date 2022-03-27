@@ -1,7 +1,7 @@
-import { Category } from "../interfaces/category.interface";
-import { BadRequestException } from "../exceptions/bad-request.exception";
+import { Category } from "../interfaces";
+import { BadRequestException } from "../exceptions";
 import CategoryModel from "../models/category.model";
-import { CreateCategoryDto, UpdateCategoryDto } from "../dtos/category.dto";
+import { CreateCategoryDto, UpdateCategoryDto } from "../dtos";
 
 export default class CategoryService {
   public Category = CategoryModel;

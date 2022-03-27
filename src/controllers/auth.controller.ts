@@ -1,5 +1,5 @@
-import { CreateUserDto } from "../dtos/user.dto";
-import { User } from "../interfaces/user.interface";
+import { CreateUserDto } from "../dtos";
+import { User } from "../interfaces";
 import AuthService from "../services/auth.service";
 import { Handler } from "express";
 

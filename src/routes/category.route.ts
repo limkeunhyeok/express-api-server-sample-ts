@@ -1,6 +1,8 @@
 import CategoryController from "../controllers/category.controller";
 import { wrap } from "../lib/wrap";
 import { Routes } from "../interfaces";
+import { CreateCategoryDto } from "../dtos";
+import validationMiddleware from "../middlewares/validation.middleware";
 import { Router } from "express";
 
 export default class CategoryRoute implements Routes {
@@ -15,7 +17,7 @@ export default class CategoryRoute implements Routes {
   private initializeRoutes() {
     const router = Router();
     router
-      .post("/", wrap(this.categoryController.create))
+      .post("/", validationMiddleware(CreateCategoryDto, "body"), wrap(this.categoryController.create))
       .get("/", wrap(this.categoryController.findAll))
       .get("/:id", wrap(this.categoryController.findOneById))
       .put("/:categoryId", wrap(this.categoryController.update))

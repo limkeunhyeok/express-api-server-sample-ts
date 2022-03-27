@@ -45,6 +45,8 @@ export default class UserService {
       ...userData,
       password: encryptedPassword,
       updatedAt: now,
+    }, {
+      new: true
     });
     return updatedUserData;
   }

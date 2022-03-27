@@ -35,7 +35,11 @@ export default class CategoryService {
     const hasCategory: Category = await this.Category.findOne({ _id: categoryId });
     if (!hasCategory) throw new BadRequestException("Category does not exists.");
 
-    const updatedCategoryData: Category = await this.Category.findByIdAndUpdate(categoryId, { ...categoryData });
+    const updatedCategoryData: Category = await this.Category.findByIdAndUpdate(
+      categoryId,
+      { ...categoryData },
+      { new: true }
+    );
     return updatedCategoryData;
   }
 

@@ -1,7 +1,7 @@
 import CategoryController from "../controllers/category.controller";
 import { wrap } from "../lib/wrap";
 import { Routes } from "../interfaces";
-import { CreateCategoryDto } from "../dtos";
+import { CreateCategoryDto, UpdateCategoryDto } from "../dtos";
 import validationMiddleware from "../middlewares/validation.middleware";
 import { Router } from "express";
 
@@ -20,8 +20,8 @@ export default class CategoryRoute implements Routes {
       .post("/", validationMiddleware(CreateCategoryDto, "body"), wrap(this.categoryController.create))
       .get("/", wrap(this.categoryController.findAll))
       .get("/:id", wrap(this.categoryController.findOneById))
-      .put("/:categoryId", wrap(this.categoryController.update))
-      .delete("/:categoryId", wrap(this.categoryController.delete))
+      .put("/:id", validationMiddleware(UpdateCategoryDto, "body"), wrap(this.categoryController.update))
+      .delete("/:id", wrap(this.categoryController.delete))
       
     this.router.use(this.path, router);
   }

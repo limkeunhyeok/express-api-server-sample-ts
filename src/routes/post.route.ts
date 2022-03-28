@@ -2,6 +2,8 @@ import PostController from "../controllers/post.controller";
 import { wrap } from "../lib/wrap";
 import { Routes } from "../interfaces";
 import { Router } from "express";
+import validationMiddleware from "../middlewares/validation.middleware";
+import { CreatePostDto } from "../dtos";
 
 export default class PostRoute implements Routes {
   public path = "/posts";
@@ -15,7 +17,7 @@ export default class PostRoute implements Routes {
   private initializeRoutes() {
     const router = Router();
     router
-      .post("/", wrap(this.postController.create))
+      .post("/", validationMiddleware(CreatePostDto, "body"), wrap(this.postController.create))
       .get("/", wrap(this.postController.findAll))
       .get("/:id", wrap(this.postController.findOneById))
       .put("/:id", wrap(this.postController.update))

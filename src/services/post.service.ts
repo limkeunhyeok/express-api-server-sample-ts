@@ -1,11 +1,15 @@
 import shortid from "shortid";
 import { CreatePostDto, UpdatePostDto } from "../dtos";
 import { Post } from "../interfaces";
-import PostModel from "../models/post.model";
 import { BadRequestException } from "../exceptions";
+import PostModel from "../models/post.model";
+import UserModel from "../models/user.model";
+import CategoryModel from "../models/category.model";
 
 export default class PostService {
   public Post = PostModel;
+  public User = UserModel;
+  public Category = CategoryModel;
 
   public async findAll(): Promise<Post[]> {
     const posts: Post[] = await this.Post.find({});
@@ -33,11 +37,16 @@ export default class PostService {
   }
 
   public async createPost(postData: CreatePostDto): Promise<Post> {
-    const slug = `${postData.title.replace(/\s/gi, "-")}-${shortid.generate()}`;
     const now = new Date().toISOString();
+
+    const hasUser = await this.User.findById({ _id: postData.userId });
+    if (!hasUser) throw new BadRequestException("User does not exists.");
+
+    const hasCategory = await this.Category.findById({ _id: postData.categoryId });
+    if (!hasCategory) throw new BadRequestException("Category does not exists.");
+
     const createdPostData: Post = await this.Post.create({
       ...postData,
-      slug,
       createdAt: now,
       updatedAt: now
     });
@@ -48,11 +57,9 @@ export default class PostService {
     const hasPost: Post = await this.Post.findOne({ _id: postId });
     if (!hasPost) throw new BadRequestException("Post does not exists.");
 
-    const slug = `${postData.title.replace(/\s/gi, "-")}-${shortid.generate()}`;
     const now = new Date().toISOString();
     const updatedPostData: Post = await this.Post.findByIdAndUpdate(postId, {
       ...postData,
-      slug,
       updatedAt: now
     });
     return updatedPostData;

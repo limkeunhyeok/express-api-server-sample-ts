@@ -5,6 +5,7 @@ export const getConnection = async () => {
   const connection: Connection = await mongoose.createConnection(`mongodb://${DB_HOST}/${DB_PORT}/${DB_DATABASE}`, {
     dbName: "api-sample-ts-test"
   });
+  await connection.dropDatabase()
   return connection
 }
 

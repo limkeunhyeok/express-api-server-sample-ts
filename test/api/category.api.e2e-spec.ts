@@ -231,6 +231,6 @@ describe("Category API (e2e)", () => {
       // then
       expect(isApiResponse(res.body)).toBe(true);
       expectResponseFailed(res);
-    })
-  })
+    });
+  });
 });

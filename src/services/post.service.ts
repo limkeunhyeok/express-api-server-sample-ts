@@ -27,13 +27,9 @@ export default class PostService {
   }
 
   public async findOneByPostId(postId: string): Promise<Post> {
-    const post: Post = await this.Post.findOne({ _id: postId });
-    return post;
-  }
-  
-  public async findOneBySlug(slug: string): Promise<Post> {
-    const post: Post = await this.Post.findOne({ slug });
-    return post;
+    const hasPost: Post = await this.Post.findOne({ _id: postId });
+    if (!hasPost) throw new BadRequestException("Post does not exists.");
+    return hasPost;
   }
 
   public async createPost(postData: CreatePostDto): Promise<Post> {
@@ -61,6 +57,8 @@ export default class PostService {
     const updatedPostData: Post = await this.Post.findByIdAndUpdate(postId, {
       ...postData,
       updatedAt: now
+    }, {
+      new: true
     });
     return updatedPostData;
   }

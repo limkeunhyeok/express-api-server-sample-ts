@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import request from "supertest";
 import { CreatePostDto } from "../../src/dtos";
 import { CreateUserDto } from "../../src/dtos/user.dto";
@@ -168,6 +169,218 @@ describe("POST API (e2e)", () => {
         expect(post).toHaveProperty('createdAt');
         expect(post).toHaveProperty('updatedAt');
       });
-    })
+    });
+  });
+
+  describe("GET /api/posts/{id}", () => {
+    const apiPath = `${rootApiPath}`;
+    it("success - find one by id (200)", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+
+      const user = await createUser();
+      const category = await createCategory();
+      const postRaw = mockPostRaw(user, category);
+      const post = await createPost(postRaw);
+      const postId = post._id;
+
+      // when
+      const res = await withHeaders(req.get(`${apiPath}/${postId}`).expect(200));
+
+      // then
+      expect(isApiResponse(res.body)).toBe(true);
+      expectResponseSucceed(res);
+
+      const result = getResponseData(res);
+      expect(result).toHaveProperty('_id');
+      expect(result).toHaveProperty('userId');
+      expect(result).toHaveProperty('categoryId');
+      expect(result).toHaveProperty('title');
+      expect(result).toHaveProperty('content');
+      expect(result).toHaveProperty('createdAt');
+      expect(result).toHaveProperty('updatedAt');
+    });
+    
+    it("failed - bad request (200) # non-existent post", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+
+      const user = await createUser();
+      const category = await createCategory();
+      const postRaw = mockPostRaw(user, category);
+      await createPost(postRaw);
+      const postId = new ObjectId()
+
+      // when
+      const res = await withHeaders(req.get(`${apiPath}/${postId}`).expect(400));
+
+      // then
+      expect(isApiResponse(res.body)).toBe(true);
+      expectResponseFailed(res);
+    });
+  });
+
+  describe("PUT /api/posts/{id}", () => {
+    const apiPath = `${rootApiPath}`;
+    it("success - update post (200)", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+
+      const user = await createUser();
+      const category = await createCategory();
+      const postRaw = mockPostRaw(user, category);
+      const post = await createPost(postRaw);
+      const postId = post._id;
+
+      const newPostRaw = mockPostRaw(user, category);
+      const params = {
+        title: newPostRaw.title,
+        content: newPostRaw.content,
+      }
+
+       // when
+       const res = await withHeaders(req.put(`${apiPath}/${postId}`).send(params).expect(200));
+
+       // then
+       expect(isApiResponse(res.body)).toBe(true);
+       expectResponseSucceed(res);
+ 
+       const result = getResponseData(res);
+       expect(result).toHaveProperty('_id');
+       expect(result).toHaveProperty('userId');
+       expect(result).toHaveProperty('categoryId');
+       expect(result).toHaveProperty('title', newPostRaw.title);
+       expect(result).toHaveProperty('content', newPostRaw.content);
+       expect(result).toHaveProperty('createdAt');
+       expect(result).toHaveProperty('updatedAt');
+    });
+
+    it("failed - bad request (400) # non-existent post", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+
+      const user = await createUser();
+      const category = await createCategory();
+      const postRaw = mockPostRaw(user, category);
+      await createPost(postRaw);
+
+      const postId = new ObjectId();
+
+      const newPostRaw = mockPostRaw(user, category);
+      const params = {
+        title: newPostRaw.title,
+        content: newPostRaw.content,
+      }
+
+       // when
+       const res = await withHeaders(req.put(`${apiPath}/${postId}`).send(params).expect(400));
+
+       // then
+       expect(isApiResponse(res.body)).toBe(true);
+       expectResponseFailed(res);
+    });
+    
+    it("failed - bad request (400) # required title", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+
+      const user = await createUser();
+      const category = await createCategory();
+      const postRaw = mockPostRaw(user, category);
+      const post = await createPost(postRaw);
+      const postId = post._id;
+
+      const newPostRaw = mockPostRaw(user, category);
+      const params = {
+        content: newPostRaw.content,
+      }
+
+       // when
+       const res = await withHeaders(req.put(`${apiPath}/${postId}`).send(params).expect(400));
+
+       // then
+       expect(isApiResponse(res.body)).toBe(true);
+       expectResponseFailed(res);
+    });
+    
+    it("failed - bad request (400) # required content", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+
+      const user = await createUser();
+      const category = await createCategory();
+      const postRaw = mockPostRaw(user, category);
+      const post = await createPost(postRaw);
+      const postId = post._id;
+
+      const newPostRaw = mockPostRaw(user, category);
+      const params = {
+        title: newPostRaw.title,
+      }
+
+       // when
+       const res = await withHeaders(req.put(`${apiPath}/${postId}`).send(params).expect(400));
+
+       // then
+       expect(isApiResponse(res.body)).toBe(true);
+       expectResponseFailed(res);
+    });
+  });
+
+  describe("DELETE /api/posts/{id}", () => {
+    const apiPath = `${rootApiPath}`;
+    it("success - delete post (200)", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+
+      const user = await createUser();
+      const category = await createCategory();
+      const postRaw = mockPostRaw(user, category);
+      const post = await createPost(postRaw);
+      const postId = post._id;
+
+       // when
+       const res = await withHeaders(req.delete(`${apiPath}/${postId}`).expect(200));
+
+       // then
+       expect(isApiResponse(res.body)).toBe(true);
+       expectResponseSucceed(res);
+ 
+       const result = getResponseData(res);
+       expect(result).toHaveProperty('_id');
+       expect(result).toHaveProperty('userId');
+       expect(result).toHaveProperty('categoryId');
+       expect(result).toHaveProperty('title');
+       expect(result).toHaveProperty('content');
+       expect(result).toHaveProperty('createdAt');
+       expect(result).toHaveProperty('updatedAt');
+    });
+    
+    it("failed - bad request (400) # non-existent post", async () => {
+      // given
+      const headers = await fetchHeaders(req);
+      const withHeaders = withHeadersBy(headers);
+
+      const user = await createUser();
+      const category = await createCategory();
+      const postRaw = mockPostRaw(user, category);
+      await createPost(postRaw);
+
+      const postId = new ObjectId();
+
+       // when
+       const res = await withHeaders(req.delete(`${apiPath}/${postId}`).expect(400));
+
+       // then
+       expect(isApiResponse(res.body)).toBe(true);
+       expectResponseFailed(res);
+    });
   })
 });

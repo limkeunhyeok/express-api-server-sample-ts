@@ -8,6 +8,7 @@ export default class CommentController {
 
   public create: Handler = async (req) => {
     const params: CreateCommentDto = { ...req.body };
+    const postId = req.query;
     const comment: Comment = await this.commentService.createComment(params);
     return comment;
   }

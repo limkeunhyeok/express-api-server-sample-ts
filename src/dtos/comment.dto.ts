@@ -5,8 +5,5 @@ export class CreateCommentDto {
   public userId: string;
 
   @IsString()
-  public postId: string;
-
-  @IsString()
   public content: string;
 }

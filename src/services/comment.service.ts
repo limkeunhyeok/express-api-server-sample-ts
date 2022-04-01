@@ -9,10 +9,11 @@ export default class CommentService {
   public Comment = CommentModel;
   public Post = PostModel;
 
-  public async createComment(commentData: CreateCommentDto): Promise<Comment> {
+  public async createComment(postId, commentData: CreateCommentDto): Promise<Comment> {
     const now = new Date().toISOString();
     const createdCommentData: Comment = await this.Comment.create({
       ...commentData,
+      postId,
       createdAt: now
     });
     return createdCommentData;

@@ -1,7 +1,8 @@
+import { ObjectId } from "mongodb";
 import request from "supertest";
 import { CreateUserDto } from "../../src/dtos/user.dto";
 import { verify } from "../../src/lib/jwt";
-import { createUser, mockUserRaw } from "../lib/mockup";
+import { createUser, createCategory, createPost, createComment, mockCommentRaw, mockPostRaw } from "../lib/mockup";
 import {
   expectResponseFailed,
   expectResponseSucceed,
@@ -13,28 +14,33 @@ import {
   withHeadersBy,
 } from "../lib/utils";
 
-describe("Auth API (e2e)", () => {
+describe("Comment API (e2e)", () => {
   const app = getServer();
   const req = request(app);
   
-  const rootApiPath = "/api/auth";
+  const rootApiPath = "/api/comments";
   
-  describe("POST /api/comment", () => {
-    const apiPath = `${rootApiPath}/signUp`;
-    it("success - signup (200)", async () => {
+  describe("POST /api/comments", () => {
+    const apiPath = `${rootApiPath}`;
+    it("success - create comment (200)", async () => {
       // given
       const headers = await fetchHeaders(req);
       const withHeaders = withHeadersBy(headers);
 
-      const userRaw = mockUserRaw();
-      const params: CreateUserDto = {
-        email: userRaw.email,
-        password: userRaw.password,
-        nick: userRaw.nick,
-      };
+      const user = await createUser();
+      const category = await createCategory();
+      
+      const postRaw = mockPostRaw(user, category);
+      const post = await createPost(postRaw);
+      
+      const commentRaw = mockCommentRaw(user, post);
+      const params = {
+        userId: commentRaw.userId,
+        content: commentRaw.content,
+      }
 
       // when
-      const res = await withHeaders(req.post(apiPath).send(params).expect(200));
+      const res = await withHeaders(req.post(`${apiPath}`).query({postId: post._id.toString()}).send(params).expect(200));
 
       // then
       expect(isApiResponse(res.body)).toBe(true);
@@ -42,124 +48,131 @@ describe("Auth API (e2e)", () => {
 
       const result = getResponseData(res);
       expect(result).toHaveProperty('_id');
-      expect(result).toHaveProperty('email', userRaw.email);
-      expect(result).toHaveProperty('password');
-      expect(result).toHaveProperty('nick', userRaw.nick);
-      expect(result).toHaveProperty('createdAt');
-      expect(result).toHaveProperty('updatedAt');
+      expect(result).toHaveProperty('userId', user._id.toString());
+      expect(result).toHaveProperty('postId', post._id.toString());
+      expect(result).toHaveProperty('content', params.content);
     });
-
-    it("failed - bad request (400) # requied email", async () => {
+    
+    it("failed - bad request (400) # required user id", async () => {
       // given
       const headers = await fetchHeaders(req);
       const withHeaders = withHeadersBy(headers);
 
-      const userRaw = mockUserRaw();
+      const user = await createUser();
+      const category = await createCategory();
+      
+      const postRaw = mockPostRaw(user, category);
+      const post = await createPost(postRaw);
+      
+      const commentRaw = mockCommentRaw(user, post);
       const params = {
-        password: userRaw.password,
-        nick: userRaw.nick,
-      };
+        // userId: commentRaw.userId,
+        content: commentRaw.content,
+      }
 
       // when
-      const res = await withHeaders(req.post(apiPath).send(params).expect(400));
+      const res = await withHeaders(req.post(`${apiPath}`).query({postId: post._id.toString()}).send(params).expect(400));
 
       // then
       expect(isApiResponse(res.body)).toBe(true);
       expectResponseFailed(res);
     });
     
-    it("failed - bad request (400) # requied password", async () => {
+    it("failed - bad request (400) # required post id", async () => {
       // given
       const headers = await fetchHeaders(req);
       const withHeaders = withHeadersBy(headers);
 
-      const userRaw = mockUserRaw();
+      const user = await createUser();
+      const category = await createCategory();
+      
+      const postRaw = mockPostRaw(user, category);
+      const post = await createPost(postRaw);
+      
+      const commentRaw = mockCommentRaw(user, post);
       const params = {
-        email: userRaw.email,
-        nick: userRaw.nick,
-      };
+        userId: commentRaw.userId,
+        content: commentRaw.content,
+      }
 
       // when
-      const res = await withHeaders(req.post(apiPath).send(params).expect(400));
+      const res = await withHeaders(req.post(`${apiPath}`).send(params).expect(400));
 
       // then
       expect(isApiResponse(res.body)).toBe(true);
       expectResponseFailed(res);
     });
     
-    it("failed - bad request (400) # requied nick", async () => {
+    it("failed - bad request (400) # required cotent", async () => {
       // given
       const headers = await fetchHeaders(req);
       const withHeaders = withHeadersBy(headers);
 
-      const userRaw = mockUserRaw();
+      const user = await createUser();
+      const category = await createCategory();
+      
+      const postRaw = mockPostRaw(user, category);
+      const post = await createPost(postRaw);
+      
+      const commentRaw = mockCommentRaw(user, post);
       const params = {
-        email: userRaw.email,
-        password: userRaw.password,
-      };
+        userId: commentRaw.userId,
+        // content: commentRaw.content,
+      }
 
       // when
-      const res = await withHeaders(req.post(apiPath).send(params).expect(400));
+      const res = await withHeaders(req.post(`${apiPath}`).query({postId: post._id.toString()}).send(params).expect(400));
 
       // then
       expect(isApiResponse(res.body)).toBe(true);
       expectResponseFailed(res);
     });
     
-    it("failed - bad request (400) # invalid email", async () => {
+    it("failed - bad request (400) # non-existent user", async () => {
       // given
       const headers = await fetchHeaders(req);
       const withHeaders = withHeadersBy(headers);
 
-      const userRaw = mockUserRaw();
+      const user = await createUser();
+      const category = await createCategory();
+      
+      const postRaw = mockPostRaw(user, category);
+      const post = await createPost(postRaw);
+      
+      const commentRaw = mockCommentRaw(user, post);
       const params = {
-        email: "example",
-        password: userRaw.password,
-        nick: userRaw.nick
-      };
+        userId: new ObjectId(),
+        content: commentRaw.content,
+      }
 
       // when
-      const res = await withHeaders(req.post(apiPath).send(params).expect(400));
+      const res = await withHeaders(req.post(`${apiPath}`).query({postId: post._id.toString()}).send(params).expect(400));
 
       // then
       expect(isApiResponse(res.body)).toBe(true);
       expectResponseFailed(res);
     });
     
-    it("failed - bad request (400) # invalid password - to short", async () => {
+    it("failed - bad request (400) # non-existent post", async () => {
       // given
       const headers = await fetchHeaders(req);
       const withHeaders = withHeadersBy(headers);
 
-      const userRaw = mockUserRaw();
+      const user = await createUser();
+      const category = await createCategory();
+      
+      const postRaw = mockPostRaw(user, category);
+      const post = await createPost(postRaw);
+      
+      const commentRaw = mockCommentRaw(user, post);
       const params = {
-        email: userRaw.email,
-        password: "1234567",
-        nick: userRaw.nick
-      };
+        userId: commentRaw.userId,
+        content: commentRaw.content,
+      }
+      const postId = new ObjectId();
 
       // when
-      const res = await withHeaders(req.post(apiPath).send(params).expect(400));
-
-      // then
-      expect(isApiResponse(res.body)).toBe(true);
-      expectResponseFailed(res);
-    });
-    
-    it("failed - bad request (400) # invalid password - to long", async () => {
-      // given
-      const headers = await fetchHeaders(req);
-      const withHeaders = withHeadersBy(headers);
-
-      const userRaw = mockUserRaw();
-      const params = {
-        email: userRaw.email,
-        password: "12345678901234567",
-        nick: userRaw.nick
-      };
-
-      // when
-      const res = await withHeaders(req.post(apiPath).send(params).expect(400));
+      const res = await withHeaders(req.post(`${apiPath}`).query({postId: postId}).send(params).expect(400));
 
       // then
       expect(isApiResponse(res.body)).toBe(true);

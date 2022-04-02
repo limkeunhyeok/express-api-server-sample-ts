@@ -3,13 +3,21 @@ import { BadRequestException } from "../exceptions";
 import CommentModel from "../models/comment.model";
 import { CreateCommentDto } from "../dtos";
 import PostModel from "../models/post.model";
+import UserModel from "../models/user.model";
 import { UnauthorizedException } from "../exceptions";
 
 export default class CommentService {
   public Comment = CommentModel;
   public Post = PostModel;
+  public User = UserModel;
 
   public async createComment(postId, commentData: CreateCommentDto): Promise<Comment> {
+    const hasUser = await this.User.findOne({ _id: commentData.userId });
+    if (!hasUser) throw new BadRequestException("User does not exists.");
+
+    const hasPost = await this.Post.findOne({ _id: postId });
+    if (!hasPost) throw new BadRequestException("Post does not exists.");
+
     const now = new Date().toISOString();
     const createdCommentData: Comment = await this.Comment.create({
       ...commentData,

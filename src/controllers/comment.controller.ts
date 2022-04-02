@@ -2,14 +2,20 @@ import { CreateCommentDto } from "../dtos";
 import { Comment } from "../interfaces";
 import CommentService from "../services/comment.service";
 import { Handler } from "express";
+import { BadRequestException } from "../exceptions";
 
 export default class CommentController {
   public commentService = new CommentService();
 
   public create: Handler = async (req) => {
     const params: CreateCommentDto = { ...req.body };
-    const postId = req.query;
-    const comment: Comment = await this.commentService.createComment(params);
+    const { postId } = req.query;
+
+    if (!postId) {
+      throw new BadRequestException("required post id");
+    }
+
+    const comment: Comment = await this.commentService.createComment(postId, params);
     return comment;
   }
 

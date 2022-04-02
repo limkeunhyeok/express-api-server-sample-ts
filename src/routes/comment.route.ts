@@ -2,6 +2,8 @@ import CommentController from "../controllers/comment.controller";
 import { wrap } from "../lib/wrap";
 import { Routes } from "../interfaces";
 import { Router } from "express";
+import { CreateCommentDto } from "../dtos";
+import validationMiddleware from "../middlewares/validation.middleware";
 
 export default class CommentRoute implements Routes {
   public path = "/comments";
@@ -15,7 +17,7 @@ export default class CommentRoute implements Routes {
   private initializeRoutes() {
     const router = Router();
     router
-      .post("/", wrap(this.commentController.create))
+      .post("/", validationMiddleware(CreateCommentDto, "body"), wrap(this.commentController.create))
       .get("/", wrap(this.commentController.findByUserId))
       .get("/:postId", wrap(this.commentController.findByPostId))
       .delete("/:commentId", wrap(this.commentController.delete))

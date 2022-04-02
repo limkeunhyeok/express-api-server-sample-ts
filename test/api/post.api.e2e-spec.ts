@@ -202,7 +202,7 @@ describe("POST API (e2e)", () => {
       expect(result).toHaveProperty('updatedAt');
     });
     
-    it("failed - bad request (200) # non-existent post", async () => {
+    it("failed - bad request (400) # non-existent post", async () => {
       // given
       const headers = await fetchHeaders(req);
       const withHeaders = withHeadersBy(headers);

@@ -1,0 +1,52 @@
+tags:
+- name: category
+  description: category API
+
+paths:
+  /api/categories:
+    post:
+      tags:
+      - category
+      summary: create category
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+    get:
+      tags:
+      - category
+      summary: find all category
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+  /api/categories/{id}:
+    get:
+      tags:
+      - category
+      summary: find one category by id
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+    put:
+      tags:
+      - category
+      summary: update one category by id
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+    delete:
+      tags:
+      - category
+      summary: delete one category by id
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'

@@ -1,0 +1,23 @@
+definitions:
+  user:
+    type: object
+    required:
+        - email
+        - password
+        - nick
+    properties:
+      _id:
+        description: user id
+      email:
+        type: string
+        description: user email
+      password:
+        type: string
+        description: user password
+      nick:
+        type: string
+        description: user nickname
+      createdAt:
+        type: date
+        description: user create date
+      

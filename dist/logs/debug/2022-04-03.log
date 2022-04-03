@@ -1,0 +1,9 @@
+2022-04-03 11:52:10 info: ENV: production
+2022-04-03 11:52:10 info: Example app listening on the port 3000
+2022-04-03 11:52:29 info: ::1 - - [03/Apr/2022:02:52:29 +0000] "GET /api-docs HTTP/1.1" 301 183 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36"
+2022-04-03 11:52:29 info: ::1 - - [03/Apr/2022:02:52:29 +0000] "GET /api-docs/ HTTP/1.1" 200 3102 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36"
+2022-04-03 11:52:29 info: ::1 - - [03/Apr/2022:02:52:29 +0000] "GET /api-docs/swagger-ui-init.js HTTP/1.1" 200 1336 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36"
+2022-04-03 11:52:29 info: ::1 - - [03/Apr/2022:02:52:29 +0000] "GET /api-docs/swagger-ui.css HTTP/1.1" 200 143980 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36"
+2022-04-03 11:52:29 info: ::1 - - [03/Apr/2022:02:52:29 +0000] "GET /api-docs/swagger-ui-standalone-preset.js HTTP/1.1" 200 339540 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36"
+2022-04-03 11:52:29 info: ::1 - - [03/Apr/2022:02:52:29 +0000] "GET /api-docs/swagger-ui-bundle.js HTTP/1.1" 200 1095130 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36"
+2022-04-03 11:52:30 info: ::1 - - [03/Apr/2022:02:52:30 +0000] "GET /api-docs/favicon-32x32.png HTTP/1.1" 200 628 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36"

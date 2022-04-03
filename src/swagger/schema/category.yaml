@@ -1,0 +1,15 @@
+definitions:
+  category:
+    type: object
+    required:
+        - title
+    properties:
+      _id:
+        description: category id
+      title:
+        type: string
+        description: category title
+      createdAt:
+        type: date
+        description: category create date
+      

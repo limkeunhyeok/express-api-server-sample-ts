@@ -1,0 +1,22 @@
+definitions:
+  comment:
+    type: object
+    required:
+        - userId
+        - postId
+        - content
+    properties:
+      _id:
+        description: comment id
+      userId:
+        type: string
+        description: comment author id
+      postId:
+        type: string
+        description: comment post id
+      content:
+        type: string
+        description: comment content
+      createdAt:
+        type: date
+        description: comment create date

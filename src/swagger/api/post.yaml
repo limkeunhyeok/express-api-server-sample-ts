@@ -1,0 +1,52 @@
+tags:
+- name: post
+  description: post API
+
+paths:
+  /api/posts:
+    post:
+      tags:
+      - post
+      summary: create post
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+    get:
+      tags:
+      - post
+      summary: find all post
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+  /api/posts/{id}:
+    get:
+      tags:
+      - post
+      summary: find one post by id
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+    put:
+      tags:
+      - post
+      summary: update one post by id
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+    delete:
+      tags:
+      - post
+      summary: delete one post by id
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'

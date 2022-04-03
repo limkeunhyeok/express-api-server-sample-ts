@@ -1,0 +1,53 @@
+tags:
+- name: users
+  description: users API
+
+paths:
+  /api/users:
+    get:
+      tags:
+      - users
+      summary: find all users
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+    post:
+      tags:
+      - users
+      summary: create user
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+  /api/users/{id}:
+    get:
+      tags:
+      - users
+      summary: find user info by id
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+    put:
+      tags:
+      - users
+      summary: update user info by id
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+    delete:
+      tags:
+      - users
+      summary: delete user by id
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+          

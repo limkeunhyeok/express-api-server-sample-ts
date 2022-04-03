@@ -1,0 +1,30 @@
+definitions:
+  post:
+    type: object
+    required:
+        - userId
+        - categoryId
+        - title
+        - content
+    properties:
+      _id:
+        description: post id
+      userId:
+        type: string
+        description: post author id
+      categoryId:
+        type: string
+        description: post category id
+      title:
+        type: string
+        description: post title
+      content:
+        type: string
+        description: post content
+      createdAt:
+        type: date
+        description: post create date
+      updatedAt:
+        type: date
+        description: post update date
+      

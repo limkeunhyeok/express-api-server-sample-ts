@@ -2,10 +2,12 @@ import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
 import { connectToDatabase } from "./lib/database";
 import { set } from "mongoose";
 import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from "./config";
-import { Routes } from "@interfaces/routes.interface";
+import { Routes } from "./interfaces/routes.interface";
 import { logger, stream } from "./lib/logger";
 import errorMiddleware from "./middlewares/error.middleware";
 import authMiddleware from "./middlewares/auth.middleware";
@@ -23,7 +25,7 @@ export default class App {
     this.initializeDatabase();
     this.initializeMiddlewares();
     this.initializeRoutes(routes);
-    // this.initializeSwagger();
+    this.initializeSwagger();
     this.initializeErrorHandling();
   }
 
@@ -55,21 +57,24 @@ export default class App {
     })
   }
 
-  // private initializeSwagger() {
-  //   const options = {
-  //     swaggerDefinition: {
-  //       info: {
-  //         title: "REST API",
-  //         version: "1.0.0",
-  //         description: "Example docs",
-  //       },
-  //     },
-  //     apis: ["swagger.yaml"],
-  //   };
+  private initializeSwagger() {
+    const options = {
+      swaggerDefinition: {
+        info: {
+          title: "REST API",
+          version: "1.0.0",
+          description: "Example docs",
+        },
+      },
+      apis: [
+        "./src/swagger/schema/*",
+        "./src/swagger/api/*"
+      ],
+    };
 
-  //   const specs = swaggerJSDoc(options);
-  //   this.app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
-  // }
+    const specs = swaggerJSDoc(options);
+    this.app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+  }
 
   private initializeErrorHandling() {
     this.app.use(errorMiddleware);

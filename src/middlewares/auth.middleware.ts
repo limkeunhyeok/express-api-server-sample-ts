@@ -1,4 +1,4 @@
-import { UnauthorizedException } from "../exceptions";
+import { UnauthorizedException } from "../common/exceptions";
 import { verify } from "../lib/jwt";
 import { Handler } from "express";
 

@@ -2,7 +2,7 @@ import UserModel from "../models/user.model";
 import { User } from "../interfaces";
 import { hash } from "bcrypt";
 import { CreateUserDto, UpdateUserDto } from "../dtos";
-import { BadRequestException } from "../exceptions";
+import { BadRequestException } from "../common/exceptions";
 
 export default class UserService {
   public User = UserModel;

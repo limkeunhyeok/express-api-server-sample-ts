@@ -2,7 +2,7 @@ import { CreateCommentDto } from "../dtos";
 import { Comment } from "../interfaces";
 import CommentService from "../services/comment.service";
 import { Handler } from "express";
-import { BadRequestException } from "../exceptions";
+import { BadRequestException } from "../common/exceptions";
 
 export default class CommentController {
   public commentService = new CommentService();

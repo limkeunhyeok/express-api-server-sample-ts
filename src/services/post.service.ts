@@ -1,7 +1,7 @@
 import shortid from "shortid";
 import { CreatePostDto, UpdatePostDto } from "../dtos";
 import { Post } from "../interfaces";
-import { BadRequestException } from "../exceptions";
+import { BadRequestException } from "../common/exceptions";
 import PostModel from "../models/post.model";
 import UserModel from "../models/user.model";
 import CategoryModel from "../models/category.model";

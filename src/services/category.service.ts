@@ -1,5 +1,5 @@
 import { Category } from "../interfaces";
-import { BadRequestException } from "../exceptions";
+import { BadRequestException } from "../common/exceptions";
 import CategoryModel from "../models/category.model";
 import { CreateCategoryDto, UpdateCategoryDto } from "../dtos";
 

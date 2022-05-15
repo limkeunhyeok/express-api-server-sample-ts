@@ -11,7 +11,10 @@ export default class CommentService {
   public Post = PostModel;
   public User = UserModel;
 
-  public async createComment(postId, commentData: CreateCommentDto): Promise<Comment> {
+  public async createComment(
+    postId,
+    commentData: CreateCommentDto
+  ): Promise<Comment> {
     const hasUser = await this.User.findOne({ _id: commentData.userId });
     if (!hasUser) throw new BadRequestException("User does not exists.");
 
@@ -22,23 +25,27 @@ export default class CommentService {
     const createdCommentData: Comment = await this.Comment.create({
       ...commentData,
       postId,
-      createdAt: now
+      createdAt: now,
     });
     return createdCommentData;
   }
 
   public async findByUserIdAndSortByPostId(userId: string): Promise<Comment[]> {
     const comments: Comment[] = await this.Comment.find({ userId });
-    const postIdSet = new Set(comments.map(comment => comment.postId.toString()))
-    
+    const postIdSet = new Set(
+      comments.map((comment) => comment.postId.toString())
+    );
+
     let result = [];
     for (const postId of postIdSet) {
       const post = await this.Post.findOne({ _id: postId });
       const data = {
         postId,
         title: post.title,
-        comments: comments.filter((comment) => comment.postId.toString() === postId),
-      }
+        comments: comments.filter(
+          (comment) => comment.postId.toString() === postId
+        ),
+      };
       result = [...result, data];
     }
     return result;
@@ -49,13 +56,19 @@ export default class CommentService {
     return commnets;
   }
 
-  public async deletedComment(commentId: string, userId: string): Promise<Comment> {
+  public async deletedComment(
+    commentId: string,
+    userId: string
+  ): Promise<Comment> {
     const hasComment: Comment = await this.Comment.findOne({ _id: commentId });
     if (!hasComment) throw new BadRequestException("Comment does not exists");
 
-    if (hasComment.userId.toString() !== userId) throw new UnauthorizedException("Access is denied.");
+    if (hasComment.userId.toString() !== userId)
+      throw new UnauthorizedException("Access is denied.");
 
-    const deletedComment: Comment = await this.Comment.findByIdAndDelete(commentId);
-    return deletedComment
+    const deletedComment: Comment = await this.Comment.findByIdAndDelete(
+      commentId
+    );
+    return deletedComment;
   }
 }

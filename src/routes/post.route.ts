@@ -17,11 +17,19 @@ export default class PostRoute implements Routes {
   private initializeRoutes() {
     const router = Router();
     router
-      .post("/", validationMiddleware(CreatePostDto, "body"), wrap(this.postController.create))
+      .post(
+        "/",
+        validationMiddleware(CreatePostDto, "body"),
+        wrap(this.postController.create)
+      )
       .get("/", wrap(this.postController.findAll))
       .get("/:id", wrap(this.postController.findOneById))
-      .put("/:id", validationMiddleware(UpdatePostDto, "body"), wrap(this.postController.update))
-      .delete("/:id", wrap(this.postController.delete))
+      .put(
+        "/:id",
+        validationMiddleware(UpdatePostDto, "body"),
+        wrap(this.postController.update)
+      )
+      .delete("/:id", wrap(this.postController.delete));
     this.router.use(this.path, router);
   }
 }

@@ -17,8 +17,16 @@ export default class AuthRoute implements Routes {
   private initializeRoutes() {
     const router = Router();
     router
-      .post("/signUp", validationMiddleware(SignUpDto, "body"), wrap(this.authController.signUp))
-      .post("/signIn", validationMiddleware(SignInDto, "body"), wrap(this.authController.signIn))
+      .post(
+        "/signUp",
+        validationMiddleware(SignUpDto, "body"),
+        wrap(this.authController.signUp)
+      )
+      .post(
+        "/signIn",
+        validationMiddleware(SignInDto, "body"),
+        wrap(this.authController.signIn)
+      );
     this.router.use(this.path, router);
   }
 }

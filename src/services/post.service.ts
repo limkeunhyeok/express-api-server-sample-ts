@@ -38,28 +38,38 @@ export default class PostService {
     const hasUser = await this.User.findById({ _id: postData.userId });
     if (!hasUser) throw new BadRequestException("User does not exists.");
 
-    const hasCategory = await this.Category.findById({ _id: postData.categoryId });
-    if (!hasCategory) throw new BadRequestException("Category does not exists.");
+    const hasCategory = await this.Category.findById({
+      _id: postData.categoryId,
+    });
+    if (!hasCategory)
+      throw new BadRequestException("Category does not exists.");
 
     const createdPostData: Post = await this.Post.create({
       ...postData,
       createdAt: now,
-      updatedAt: now
+      updatedAt: now,
     });
     return createdPostData;
   }
 
-  public async updatePost(postId: string, postData: UpdatePostDto): Promise<Post> {
+  public async updatePost(
+    postId: string,
+    postData: UpdatePostDto
+  ): Promise<Post> {
     const hasPost: Post = await this.Post.findOne({ _id: postId });
     if (!hasPost) throw new BadRequestException("Post does not exists.");
 
     const now = new Date().toISOString();
-    const updatedPostData: Post = await this.Post.findByIdAndUpdate(postId, {
-      ...postData,
-      updatedAt: now
-    }, {
-      new: true
-    });
+    const updatedPostData: Post = await this.Post.findByIdAndUpdate(
+      postId,
+      {
+        ...postData,
+        updatedAt: now,
+      },
+      {
+        new: true,
+      }
+    );
     return updatedPostData;
   }
 

@@ -2,9 +2,9 @@ definitions:
   comment:
     type: object
     required:
-        - userId
-        - postId
-        - content
+      - userId
+      - postId
+      - content
     properties:
       _id:
         description: comment id

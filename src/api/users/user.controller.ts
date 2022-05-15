@@ -2,26 +2,16 @@ import { Controller } from "@/common/interfaces/controller.interface";
 import { Router } from "express";
 
 export default class UserController implements Controller {
-  path = '/users';
+  path = "/users";
   router = Router();
-  
-  createUser() {
 
-  }
+  createUser() {}
 
-  findAll() {
+  findAll() {}
 
-  }
+  findOneById() {}
 
-  findOneById() {
+  updateUser() {}
 
-  }
-
-  updateUser() {
-
-  }
-  
-  deleteUser() {
-
-  }
+  deleteUser() {}
 }

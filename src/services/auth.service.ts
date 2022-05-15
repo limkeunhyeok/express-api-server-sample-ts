@@ -28,7 +28,8 @@ export default class AuthService {
     if (!user) throw new BadRequestException("Email or password is incorrect.");
 
     const isValidPassword = await compare(userData.password, user.password);
-    if (!isValidPassword) throw new BadRequestException("Email or password is incorrect.");
+    if (!isValidPassword)
+      throw new BadRequestException("Email or password is incorrect.");
 
     const payload: JwtPayload = { id: user._id.toString(), nick: user.nick };
     const token = create(payload);

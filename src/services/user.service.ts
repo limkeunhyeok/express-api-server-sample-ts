@@ -15,8 +15,8 @@ export default class UserService {
   public async findUserById(userId: string): Promise<User> {
     const hasUser = await this.User.findOne({ _id: userId });
 
-    if (!hasUser) throw new BadRequestException("The user does not exists.")
-    
+    if (!hasUser) throw new BadRequestException("The user does not exists.");
+
     return hasUser;
   }
 
@@ -35,19 +35,26 @@ export default class UserService {
     return createdUserData;
   }
 
-  public async updateUser(userId: string, userData: UpdateUserDto): Promise<User> {
+  public async updateUser(
+    userId: string,
+    userData: UpdateUserDto
+  ): Promise<User> {
     const hasUser: User = await this.User.findOne({ _id: userId });
     if (!hasUser) throw new BadRequestException("The user does not exist.");
 
     const encryptedPassword = await hash(userData.password, 10);
     const now = new Date().toISOString();
-    const updatedUserData: User = await this.User.findByIdAndUpdate(userId, {
-      ...userData,
-      password: encryptedPassword,
-      updatedAt: now,
-    }, {
-      new: true
-    });
+    const updatedUserData: User = await this.User.findByIdAndUpdate(
+      userId,
+      {
+        ...userData,
+        password: encryptedPassword,
+        updatedAt: now,
+      },
+      {
+        new: true,
+      }
+    );
     return updatedUserData;
   }
 

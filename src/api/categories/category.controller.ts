@@ -2,26 +2,16 @@ import { Controller } from "@/common/interfaces/controller.interface";
 import { Router } from "express";
 
 export default class CategoryController implements Controller {
-  path = '/categories';
+  path = "/categories";
   router = Router();
-  
-  createCategory() {
 
-  }
+  createCategory() {}
 
-  findAll() {
+  findAll() {}
 
-  }
+  findOneById() {}
 
-  findOneById() {
+  updateCategory() {}
 
-  }
-
-  updateCategory() {
-
-  }
-  
-  deleteCategory() {
-
-  }
+  deleteCategory() {}
 }

@@ -1,8 +1,8 @@
 export class Response {
-  public success: boolean
-  public response?: any
-  public message?: string
-  
+  public success: boolean;
+  public response?: any;
+  public message?: string;
+
   constructor(success: boolean) {
     this.success = success;
   }
@@ -21,7 +21,7 @@ export class Response {
     return {
       success: this.success,
       response: this.response,
-      error: this.message
-    }
+      error: this.message,
+    };
   }
 }

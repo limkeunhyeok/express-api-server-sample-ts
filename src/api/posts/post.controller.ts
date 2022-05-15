@@ -2,26 +2,16 @@ import { Controller } from "@/common/interfaces/controller.interface";
 import { Router } from "express";
 
 export default class PostController implements Controller {
-  path = '/posts';
+  path = "/posts";
   router = Router();
-  
-  createPost() {
 
-  }
+  createPost() {}
 
-  findAll() {
+  findAll() {}
 
-  }
+  findOneById() {}
 
-  findOneById() {
+  updatePost() {}
 
-  }
-
-  updatePost() {
-
-  }
-  
-  deletePost() {
-
-  }
+  deletePost() {}
 }

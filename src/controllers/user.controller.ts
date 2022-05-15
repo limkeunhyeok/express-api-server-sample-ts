@@ -9,30 +9,30 @@ export default class AuthController {
   public findAll: Handler = async (req, res, next) => {
     const users: User[] = await this.userService.findAllUser();
     return users;
-  }
+  };
 
   public findOneById: Handler = async (req, res, next) => {
     const userId: string = req.params.id;
     const user: User = await this.userService.findUserById(userId);
     return user;
-  }
+  };
 
   public create: Handler = async (req, res, next) => {
     const params: CreateUserDto = { ...req.body };
     const user: User = await this.userService.createUser(params);
     return user;
-  }
+  };
 
   public update: Handler = async (req, res, next) => {
     const userId: string = req.params.id;
     const params: UpdateUserDto = { ...req.body };
     const user: User = await this.userService.updateUser(userId, params);
     return user;
-  }
+  };
 
   public delete: Handler = async (req, res, next) => {
     const userId: string = req.params.id;
     const user: User = await this.userService.deleteUser(userId);
     return user;
-  }
+  };
 }

@@ -2,10 +2,10 @@ definitions:
   post:
     type: object
     required:
-        - userId
-        - categoryId
-        - title
-        - content
+      - userId
+      - categoryId
+      - title
+      - content
     properties:
       _id:
         description: post id
@@ -27,4 +27,3 @@ definitions:
       updatedAt:
         type: date
         description: post update date
-      

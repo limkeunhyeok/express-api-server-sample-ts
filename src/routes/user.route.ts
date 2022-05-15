@@ -19,8 +19,16 @@ export default class UserRoute implements Routes {
     router
       .get("/", wrap(this.userController.findAll))
       .get("/:id", wrap(this.userController.findOneById))
-      .post("/", validationMiddleware(CreateUserDto, "body"), wrap(this.userController.create))
-      .put("/:id", validationMiddleware(UpdateUserDto, "body"), wrap(this.userController.update))
+      .post(
+        "/",
+        validationMiddleware(CreateUserDto, "body"),
+        wrap(this.userController.create)
+      )
+      .put(
+        "/:id",
+        validationMiddleware(UpdateUserDto, "body"),
+        wrap(this.userController.update)
+      )
       .delete("/:id", wrap(this.userController.delete));
     this.router.use(this.path, router);
   }

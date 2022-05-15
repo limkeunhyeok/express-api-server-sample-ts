@@ -1,18 +1,32 @@
-import { model, Schema, Document } from "mongoose";
-import { Category } from "../interfaces";
+import { model, Schema, Document, Model } from "mongoose";
 
-const categorySchema: Schema = new Schema({
-  title: {
-    type: String,
-    required: true,
+export interface CategoryInfo {
+  title: string;
+}
+
+export interface Category extends CategoryInfo {
+  createdAt: Date;
+}
+
+export interface ICategoryDocument extends Category, Document {}
+
+export interface ICategoryModel extends Model<ICategoryDocument> {}
+
+const categorySchema: Schema = new Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-}, {
-  versionKey: false,
-});
+  {
+    versionKey: false,
+  }
+);
 
 const CategoryModel = model<Category & Document>("Category", categorySchema);
 

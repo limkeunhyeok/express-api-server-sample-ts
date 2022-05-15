@@ -17,11 +17,15 @@ export default class CommentRoute implements Routes {
   private initializeRoutes() {
     const router = Router();
     router
-      .post("/", validationMiddleware(CreateCommentDto, "body"), wrap(this.commentController.create))
+      .post(
+        "/",
+        validationMiddleware(CreateCommentDto, "body"),
+        wrap(this.commentController.create)
+      )
       .get("/", wrap(this.commentController.findByUserId))
       .get("/:postId", wrap(this.commentController.findByPostId))
-      .delete("/:commentId", wrap(this.commentController.delete))
-      
+      .delete("/:commentId", wrap(this.commentController.delete));
+
     this.router.use(this.path, router);
   }
 }

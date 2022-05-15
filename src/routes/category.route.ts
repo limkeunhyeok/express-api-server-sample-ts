@@ -17,12 +17,20 @@ export default class CategoryRoute implements Routes {
   private initializeRoutes() {
     const router = Router();
     router
-      .post("/", validationMiddleware(CreateCategoryDto, "body"), wrap(this.categoryController.create))
+      .post(
+        "/",
+        validationMiddleware(CreateCategoryDto, "body"),
+        wrap(this.categoryController.create)
+      )
       .get("/", wrap(this.categoryController.findAll))
       .get("/:id", wrap(this.categoryController.findOneById))
-      .put("/:id", validationMiddleware(UpdateCategoryDto, "body"), wrap(this.categoryController.update))
-      .delete("/:id", wrap(this.categoryController.delete))
-      
+      .put(
+        "/:id",
+        validationMiddleware(UpdateCategoryDto, "body"),
+        wrap(this.categoryController.update)
+      )
+      .delete("/:id", wrap(this.categoryController.delete));
+
     this.router.use(this.path, router);
   }
 }

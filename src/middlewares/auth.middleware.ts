@@ -16,6 +16,6 @@ const authMiddleware: Handler = (req, res, next) => {
   } else {
     next();
   }
-}
+};
 
 export default authMiddleware;

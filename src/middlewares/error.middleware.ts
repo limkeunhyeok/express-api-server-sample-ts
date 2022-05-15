@@ -3,7 +3,6 @@ import { HttpException } from "../common/exceptions";
 import { logger } from "../lib/logger";
 import { Response as HttpResponse } from "../lib/response";
 
-
 const errorMiddleware = (
   error: HttpException,
   req: Request,
@@ -14,13 +13,15 @@ const errorMiddleware = (
     const status: number = error.status || 500;
     const message: string = error.message || "Something went wrong";
 
-    logger.error(`${req.method} ${req.path} >> StatusCode:: ${status}, Message:: ${message}`);
-    
+    logger.error(
+      `${req.method} ${req.path} >> StatusCode:: ${status}, Message:: ${message}`
+    );
+
     const response = new HttpResponse(false).error(message).toJson();
     res.status(status).json(response);
   } catch (error) {
     next(error);
   }
-}
+};
 
 export default errorMiddleware;

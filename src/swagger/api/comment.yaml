@@ -1,44 +1,44 @@
 tags:
-- name: comment
-  description: comment API
+  - name: comment
+    description: comment API
 
 paths:
   /api/comments:
     post:
       tags:
-      - comment
+        - comment
       summary: create comment
       responses:
         200:
-          description: 'OK'
+          description: "OK"
         500:
-          description: 'Server Error'
+          description: "Server Error"
     get:
       tags:
-      - comment
+        - comment
       summary: find all comment
       responses:
         200:
-          description: 'OK'
+          description: "OK"
         500:
-          description: 'Server Error'
+          description: "Server Error"
   /api/comments/{postId}:
     get:
       tags:
-      - comment
+        - comment
       summary: find comment by post id
       responses:
         200:
-          description: 'OK'
+          description: "OK"
         500:
-          description: 'Server Error'
+          description: "Server Error"
   /api/comments/{commentId}:
     delete:
       tags:
-      - comment
+        - comment
       summary: delete comment by comment id
       responses:
         200:
-          description: 'OK'
+          description: "OK"
         500:
-          description: 'Server Error'
+          description: "Server Error"

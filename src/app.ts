@@ -2,8 +2,8 @@ import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
-import swaggerJSDoc from 'swagger-jsdoc';
-import swaggerUi from 'swagger-ui-express';
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
 import { connectToDatabase } from "./lib/database";
 import { set } from "mongoose";
 import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from "./config";
@@ -51,10 +51,10 @@ export default class App {
 
   private initializeRoutes(routes: Routes[]) {
     this.app.get("/", (req, res) => res.send("ok"));
-    
-    routes.forEach(route => {
+
+    routes.forEach((route) => {
       this.app.use("/api", route.router);
-    })
+    });
   }
 
   private initializeSwagger() {
@@ -66,10 +66,7 @@ export default class App {
           description: "Example docs",
         },
       },
-      apis: [
-        "./src/swagger/schema/*",
-        "./src/swagger/api/*"
-      ],
+      apis: ["./src/swagger/schema/*", "./src/swagger/api/*"],
     };
 
     const specs = swaggerJSDoc(options);

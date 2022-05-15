@@ -1,25 +1,25 @@
 tags:
-- name: auth
-  description: auth API
+  - name: auth
+    description: auth API
 
 paths:
   /api/auth/signUp:
     post:
       tags:
-      - auth
+        - auth
       summary: user sign up
       responses:
         200:
-          description: 'OK'
+          description: "OK"
         500:
-          description: 'Server Error'
+          description: "Server Error"
   /api/auth/signIn:
     post:
       tags:
-      - auth
+        - auth
       summary: user sign in
       responses:
         200:
-          description: 'OK'
+          description: "OK"
         500:
-          description: 'Server Error'
+          description: "Server Error"

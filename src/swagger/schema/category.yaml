@@ -2,7 +2,7 @@ definitions:
   category:
     type: object
     required:
-        - title
+      - title
     properties:
       _id:
         description: category id
@@ -12,4 +12,3 @@ definitions:
       createdAt:
         type: date
         description: category create date
-      

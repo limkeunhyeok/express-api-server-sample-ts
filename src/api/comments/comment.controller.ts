@@ -2,26 +2,16 @@ import { Controller } from "@/common/interfaces/controller.interface";
 import { Router } from "express";
 
 export default class CommentController implements Controller {
-  path = '/comments';
+  path = "/comments";
   router = Router();
-  
-  createComment() {
 
-  }
+  createComment() {}
 
-  findAll() {
+  findAll() {}
 
-  }
+  findOneById() {}
 
-  findOneById() {
+  updateComment() {}
 
-  }
-
-  updateComment() {
-
-  }
-  
-  deleteComment() {
-
-  }
+  deleteComment() {}
 }

@@ -2,9 +2,9 @@ definitions:
   user:
     type: object
     required:
-        - email
-        - password
-        - nick
+      - email
+      - password
+      - nick
     properties:
       _id:
         description: user id
@@ -20,4 +20,3 @@ definitions:
       createdAt:
         type: date
         description: user create date
-      

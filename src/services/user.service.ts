@@ -1,4 +1,4 @@
-import {UserModel} from "../models/user.model";
+import { UserModel } from "../models/user.model";
 import { User } from "../interfaces";
 import { hash } from "bcrypt";
 import { CreateUserDto, UpdateUserDto } from "../dtos";

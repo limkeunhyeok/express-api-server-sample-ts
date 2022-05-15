@@ -16,9 +16,9 @@ import {
 describe("Auth API (e2e)", () => {
   const app = getServer();
   const req = request(app);
-  
+
   const rootApiPath = "/api/auth";
-  
+
   describe("POST /api/auth/signUp", () => {
     const apiPath = `${rootApiPath}/signUp`;
     it("success - signup (200)", async () => {
@@ -41,12 +41,12 @@ describe("Auth API (e2e)", () => {
       expectResponseSucceed(res);
 
       const result = getResponseData(res);
-      expect(result).toHaveProperty('_id');
-      expect(result).toHaveProperty('email', userRaw.email);
-      expect(result).toHaveProperty('password');
-      expect(result).toHaveProperty('nick', userRaw.nick);
-      expect(result).toHaveProperty('createdAt');
-      expect(result).toHaveProperty('updatedAt');
+      expect(result).toHaveProperty("_id");
+      expect(result).toHaveProperty("email", userRaw.email);
+      expect(result).toHaveProperty("password");
+      expect(result).toHaveProperty("nick", userRaw.nick);
+      expect(result).toHaveProperty("createdAt");
+      expect(result).toHaveProperty("updatedAt");
     });
 
     it("failed - bad request (400) # requied email", async () => {
@@ -67,7 +67,7 @@ describe("Auth API (e2e)", () => {
       expect(isApiResponse(res.body)).toBe(true);
       expectResponseFailed(res);
     });
-    
+
     it("failed - bad request (400) # requied password", async () => {
       // given
       const headers = await fetchHeaders(req);
@@ -86,7 +86,7 @@ describe("Auth API (e2e)", () => {
       expect(isApiResponse(res.body)).toBe(true);
       expectResponseFailed(res);
     });
-    
+
     it("failed - bad request (400) # requied nick", async () => {
       // given
       const headers = await fetchHeaders(req);
@@ -105,7 +105,7 @@ describe("Auth API (e2e)", () => {
       expect(isApiResponse(res.body)).toBe(true);
       expectResponseFailed(res);
     });
-    
+
     it("failed - bad request (400) # invalid email", async () => {
       // given
       const headers = await fetchHeaders(req);
@@ -115,7 +115,7 @@ describe("Auth API (e2e)", () => {
       const params = {
         email: "example",
         password: userRaw.password,
-        nick: userRaw.nick
+        nick: userRaw.nick,
       };
 
       // when
@@ -125,7 +125,7 @@ describe("Auth API (e2e)", () => {
       expect(isApiResponse(res.body)).toBe(true);
       expectResponseFailed(res);
     });
-    
+
     it("failed - bad request (400) # invalid password - to short", async () => {
       // given
       const headers = await fetchHeaders(req);
@@ -135,7 +135,7 @@ describe("Auth API (e2e)", () => {
       const params = {
         email: userRaw.email,
         password: "1234567",
-        nick: userRaw.nick
+        nick: userRaw.nick,
       };
 
       // when
@@ -145,7 +145,7 @@ describe("Auth API (e2e)", () => {
       expect(isApiResponse(res.body)).toBe(true);
       expectResponseFailed(res);
     });
-    
+
     it("failed - bad request (400) # invalid password - to long", async () => {
       // given
       const headers = await fetchHeaders(req);
@@ -155,7 +155,7 @@ describe("Auth API (e2e)", () => {
       const params = {
         email: userRaw.email,
         password: "12345678901234567",
-        nick: userRaw.nick
+        nick: userRaw.nick,
       };
 
       // when
@@ -192,8 +192,8 @@ describe("Auth API (e2e)", () => {
       expect(result.token).toBeTruthy();
 
       const decoded = verify(result.token);
-      expect(decoded).toHaveProperty('id', userRaw._id);
-      expect(decoded).toHaveProperty('nick', userRaw.nick);
+      expect(decoded).toHaveProperty("id", userRaw._id);
+      expect(decoded).toHaveProperty("nick", userRaw.nick);
     });
 
     it("failed - bad request (400) # requied email", async () => {
@@ -213,7 +213,7 @@ describe("Auth API (e2e)", () => {
       expect(isApiResponse(res.body)).toBe(true);
       expectResponseFailed(res);
     });
-    
+
     it("failed - bad request (400) # requied password", async () => {
       // given
       const headers = await fetchHeaders(req);

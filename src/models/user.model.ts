@@ -68,7 +68,7 @@ userSchema.statics.createUser = async function (
   const now: Date = new Date();
   const encryptedPassword: string = bcrypt.hashSync(
     userDoc.password,
-    SALT_ROUND
+    Number(SALT_ROUND)
   );
   const user: User = {
     email: userDoc.email,
@@ -82,7 +82,10 @@ userSchema.statics.createUser = async function (
 
 userSchema.statics.createAdmin = async function (): Promise<void> {
   const now: Date = new Date();
-  const encryptedPassword: string = bcrypt.hashSync("password", SALT_ROUND);
+  const encryptedPassword: string = bcrypt.hashSync(
+    "password",
+    Number(SALT_ROUND)
+  );
   const admin: User = {
     email: "admin",
     nick: "admin",

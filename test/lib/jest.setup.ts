@@ -1,5 +1,5 @@
 import { Connection } from "mongoose";
-import { getConnection, closeDatabase } from "../../src/lib/database"
+import { getConnection, closeDatabase } from "../../src/lib/database";
 
 let connection: Connection | null = null;
 

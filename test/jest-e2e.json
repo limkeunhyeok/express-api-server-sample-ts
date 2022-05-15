@@ -6,7 +6,5 @@
   "transform": {
     "^.+\\.(t|j)s$": "ts-jest"
   },
-  "setupFilesAfterEnv": [
-    "./test/lib/jest.setup.ts"
-  ]
+  "setupFilesAfterEnv": ["./test/lib/jest.setup.ts"]
 }

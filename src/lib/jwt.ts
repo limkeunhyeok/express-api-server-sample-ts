@@ -1,3 +1,4 @@
+import { BadRequestException } from "@/common/exceptions";
 import * as jwt from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET || "keyboard cat";
@@ -7,12 +8,20 @@ export interface JwtPayload {
   nick: string;
 }
 
-export const create = (payload: JwtPayload) => {
+export interface Token {
+  token: string;
+}
+
+export const createToken = (payload: JwtPayload) => {
   return jwt.sign(payload, JWT_SECRET, {
     expiresIn: "7d",
   });
 };
 
-export const verify = (token: string) => {
-  return jwt.verify(token, JWT_SECRET);
+export const verifyToken = (token: string) => {
+  try {
+    return jwt.verify(token, JWT_SECRET) as JwtPayload;
+  } catch (error) {
+    throw new BadRequestException("Token is invalid.");
+  }
 };

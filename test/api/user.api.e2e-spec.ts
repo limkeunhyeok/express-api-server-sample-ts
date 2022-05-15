@@ -17,9 +17,9 @@ import {
 describe("User API (e2e)", () => {
   const app = getServer();
   const req = request(app);
-  
+
   const rootApiPath = "/api/users";
-  
+
   describe("GET /api/users", () => {
     const apiPath = `${rootApiPath}`;
     it("success - find all (200)", async () => {
@@ -35,18 +35,18 @@ describe("User API (e2e)", () => {
       expectResponseSucceed(res);
 
       const result = getResponseData(res);
-      expect(Array.isArray(result)).toBe(true)
+      expect(Array.isArray(result)).toBe(true);
       result.forEach((user) => {
-        expect(user).toHaveProperty('_id');
-        expect(user).toHaveProperty('email');
-        expect(user).toHaveProperty('password');
-        expect(user).toHaveProperty('nick');
-        expect(user).toHaveProperty('createdAt');
-        expect(user).toHaveProperty('updatedAt');
-      })
+        expect(user).toHaveProperty("_id");
+        expect(user).toHaveProperty("email");
+        expect(user).toHaveProperty("password");
+        expect(user).toHaveProperty("nick");
+        expect(user).toHaveProperty("createdAt");
+        expect(user).toHaveProperty("updatedAt");
+      });
     });
   });
-  
+
   describe("POST /api/users", () => {
     const apiPath = `${rootApiPath}`;
     it("success - create user (200)", async () => {
@@ -54,11 +54,11 @@ describe("User API (e2e)", () => {
       const headers = await fetchHeaders(req);
       const withHeaders = withHeadersBy(headers);
 
-      const userRaw = mockUserRaw()
+      const userRaw = mockUserRaw();
       const params = {
         email: userRaw.email,
         password: userRaw.password,
-        nick: userRaw.nick
+        nick: userRaw.nick,
       };
 
       // when
@@ -69,23 +69,23 @@ describe("User API (e2e)", () => {
       expectResponseSucceed(res);
 
       const result = getResponseData(res);
-      expect(result).toHaveProperty('_id');
-      expect(result).toHaveProperty('email');
-      expect(result).toHaveProperty('password');
-      expect(result).toHaveProperty('nick');
-      expect(result).toHaveProperty('createdAt');
-      expect(result).toHaveProperty('updatedAt');
+      expect(result).toHaveProperty("_id");
+      expect(result).toHaveProperty("email");
+      expect(result).toHaveProperty("password");
+      expect(result).toHaveProperty("nick");
+      expect(result).toHaveProperty("createdAt");
+      expect(result).toHaveProperty("updatedAt");
     });
-    
+
     it("failed - bad request (400) # requied email", async () => {
       // given
       const headers = await fetchHeaders(req);
       const withHeaders = withHeadersBy(headers);
 
-      const userRaw = mockUserRaw()
+      const userRaw = mockUserRaw();
       const params = {
         password: userRaw.password,
-        nick: userRaw.nick
+        nick: userRaw.nick,
       };
 
       // when
@@ -101,10 +101,10 @@ describe("User API (e2e)", () => {
       const headers = await fetchHeaders(req);
       const withHeaders = withHeadersBy(headers);
 
-      const userRaw = mockUserRaw()
+      const userRaw = mockUserRaw();
       const params = {
         email: userRaw.email,
-        nick: userRaw.nick
+        nick: userRaw.nick,
       };
 
       // when
@@ -114,13 +114,13 @@ describe("User API (e2e)", () => {
       expect(isApiResponse(res.body)).toBe(true);
       expectResponseFailed(res);
     });
-    
+
     it("failed - bad request (400) # requied nick", async () => {
       // given
       const headers = await fetchHeaders(req);
       const withHeaders = withHeadersBy(headers);
 
-      const userRaw = mockUserRaw()
+      const userRaw = mockUserRaw();
       const params = {
         email: userRaw.email,
         password: userRaw.password,
@@ -144,7 +144,7 @@ describe("User API (e2e)", () => {
       const params = {
         email: "example",
         password: userRaw.password,
-        nick: userRaw.nick
+        nick: userRaw.nick,
       };
 
       // when
@@ -154,7 +154,7 @@ describe("User API (e2e)", () => {
       expect(isApiResponse(res.body)).toBe(true);
       expectResponseFailed(res);
     });
-    
+
     it("failed - bad request (400) # invalid password - to short", async () => {
       // given
       const headers = await fetchHeaders(req);
@@ -164,7 +164,7 @@ describe("User API (e2e)", () => {
       const params = {
         email: userRaw.email,
         password: "1234567",
-        nick: userRaw.nick
+        nick: userRaw.nick,
       };
 
       // when
@@ -174,7 +174,7 @@ describe("User API (e2e)", () => {
       expect(isApiResponse(res.body)).toBe(true);
       expectResponseFailed(res);
     });
-    
+
     it("failed - bad request (400) # invalid password - to long", async () => {
       // given
       const headers = await fetchHeaders(req);
@@ -184,7 +184,7 @@ describe("User API (e2e)", () => {
       const params = {
         email: userRaw.email,
         password: "12345678901234567",
-        nick: userRaw.nick
+        nick: userRaw.nick,
       };
 
       // when
@@ -202,28 +202,30 @@ describe("User API (e2e)", () => {
       // given
       const headers = await fetchHeaders(req);
       const withHeaders = withHeadersBy(headers);
-      
+
       const userRaw = mockUserRaw();
       await createUser(userRaw);
 
       const userId = userRaw._id;
 
       // when
-      const res = await withHeaders(req.get(`${apiPath}/${userId}`).expect(200));
+      const res = await withHeaders(
+        req.get(`${apiPath}/${userId}`).expect(200)
+      );
 
       // then
       expect(isApiResponse(res.body)).toBe(true);
       expectResponseSucceed(res);
 
       const result = getResponseData(res);
-      expect(result).toHaveProperty('_id');
-      expect(result).toHaveProperty('email');
-      expect(result).toHaveProperty('password');
-      expect(result).toHaveProperty('nick');
-      expect(result).toHaveProperty('createdAt');
-      expect(result).toHaveProperty('updatedAt');
+      expect(result).toHaveProperty("_id");
+      expect(result).toHaveProperty("email");
+      expect(result).toHaveProperty("password");
+      expect(result).toHaveProperty("nick");
+      expect(result).toHaveProperty("createdAt");
+      expect(result).toHaveProperty("updatedAt");
     });
-    
+
     it("failed - bad request (400) # non-existent user", async () => {
       // given
       const headers = await fetchHeaders(req);
@@ -232,21 +234,23 @@ describe("User API (e2e)", () => {
       const userId = new ObjectID();
 
       // when
-      const res = await withHeaders(req.get(`${apiPath}/${userId}`).expect(400));
+      const res = await withHeaders(
+        req.get(`${apiPath}/${userId}`).expect(400)
+      );
 
       // then
       expect(isApiResponse(res.body)).toBe(true);
       expectResponseFailed(res);
     });
   });
-  
+
   describe("PUT /api/users/{id}", () => {
     const apiPath = `${rootApiPath}`;
     it("success - update one by id (200)", async () => {
       // given
       const headers = await fetchHeaders(req);
       const withHeaders = withHeadersBy(headers);
-      
+
       const user = await createUser();
       const userId = user._id;
 
@@ -254,25 +258,27 @@ describe("User API (e2e)", () => {
 
       const params = {
         password: userRaw.password,
-        nick: userRaw.nick
-      }
+        nick: userRaw.nick,
+      };
 
       // when
-      const res = await withHeaders(req.put(`${apiPath}/${userId}`).send(params).expect(200));
+      const res = await withHeaders(
+        req.put(`${apiPath}/${userId}`).send(params).expect(200)
+      );
 
       // then
       expect(isApiResponse(res.body)).toBe(true);
       expectResponseSucceed(res);
 
       const result = getResponseData(res);
-      expect(result).toHaveProperty('_id');
-      expect(result).toHaveProperty('email');
-      expect(result).toHaveProperty('password');
-      expect(result).toHaveProperty('nick');
-      expect(result).toHaveProperty('createdAt');
-      expect(result).toHaveProperty('updatedAt');
+      expect(result).toHaveProperty("_id");
+      expect(result).toHaveProperty("email");
+      expect(result).toHaveProperty("password");
+      expect(result).toHaveProperty("nick");
+      expect(result).toHaveProperty("createdAt");
+      expect(result).toHaveProperty("updatedAt");
     });
-    
+
     it("failed - bad request (400) # required password", async () => {
       // given
       const headers = await fetchHeaders(req);
@@ -284,17 +290,19 @@ describe("User API (e2e)", () => {
       const userRaw = mockUserRaw();
 
       const params = {
-        nick: userRaw.nick
-      }
+        nick: userRaw.nick,
+      };
 
       // when
-      const res = await withHeaders(req.put(`${apiPath}/${userId}`).send(params).expect(400));
+      const res = await withHeaders(
+        req.put(`${apiPath}/${userId}`).send(params).expect(400)
+      );
 
       // then
       expect(isApiResponse(res.body)).toBe(true);
       expectResponseFailed(res);
     });
-    
+
     it("failed - bad request (400) # required nick", async () => {
       // given
       const headers = await fetchHeaders(req);
@@ -307,10 +315,12 @@ describe("User API (e2e)", () => {
 
       const params = {
         password: userRaw.password,
-      }
+      };
 
       // when
-      const res = await withHeaders(req.put(`${apiPath}/${userId}`).send(params).expect(400));
+      const res = await withHeaders(
+        req.put(`${apiPath}/${userId}`).send(params).expect(400)
+      );
 
       // then
       expect(isApiResponse(res.body)).toBe(true);
@@ -322,17 +332,19 @@ describe("User API (e2e)", () => {
       const headers = await fetchHeaders(req);
       const withHeaders = withHeadersBy(headers);
 
-      await createUser();      
+      await createUser();
       const userRaw = mockUserRaw();
       const userId = userRaw._id;
 
       const params = {
         password: userRaw.password,
-        nick: userRaw.nick
-      }
+        nick: userRaw.nick,
+      };
 
       // when
-      const res = await withHeaders(req.put(`${apiPath}/${userId}`).send(params).expect(400));
+      const res = await withHeaders(
+        req.put(`${apiPath}/${userId}`).send(params).expect(400)
+      );
 
       // then
       expect(isApiResponse(res.body)).toBe(true);
@@ -346,28 +358,30 @@ describe("User API (e2e)", () => {
       // given
       const headers = await fetchHeaders(req);
       const withHeaders = withHeadersBy(headers);
-      
+
       const userRaw = mockUserRaw();
       await createUser(userRaw);
 
       const userId = userRaw._id;
 
       // when
-      const res = await withHeaders(req.delete(`${apiPath}/${userId}`).expect(200));
+      const res = await withHeaders(
+        req.delete(`${apiPath}/${userId}`).expect(200)
+      );
 
       // then
       expect(isApiResponse(res.body)).toBe(true);
       expectResponseSucceed(res);
 
       const result = getResponseData(res);
-      expect(result).toHaveProperty('_id');
-      expect(result).toHaveProperty('email');
-      expect(result).toHaveProperty('password');
-      expect(result).toHaveProperty('nick');
-      expect(result).toHaveProperty('createdAt');
-      expect(result).toHaveProperty('updatedAt');
+      expect(result).toHaveProperty("_id");
+      expect(result).toHaveProperty("email");
+      expect(result).toHaveProperty("password");
+      expect(result).toHaveProperty("nick");
+      expect(result).toHaveProperty("createdAt");
+      expect(result).toHaveProperty("updatedAt");
     });
-    
+
     it("failed - bad request (400) # non-existent user", async () => {
       // given
       const headers = await fetchHeaders(req);
@@ -378,7 +392,9 @@ describe("User API (e2e)", () => {
       const userId = new ObjectID();
 
       // when
-      const res = await withHeaders(req.delete(`${apiPath}/${userId}`).expect(400));
+      const res = await withHeaders(
+        req.delete(`${apiPath}/${userId}`).expect(400)
+      );
 
       // then
       expect(isApiResponse(res.body)).toBe(true);

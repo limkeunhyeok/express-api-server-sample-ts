@@ -1,17 +1,27 @@
 import { plainToClass } from "class-transformer";
 import { validate, ValidationError } from "class-validator";
-import { RequestHandler } from "express";
+import { Request, RequestHandler } from "express";
 import { BadRequestException } from "../common/exceptions";
 
-const validationMiddleware = (
+export const getDataFromRequest = (req: Request): any => {
+  const data = {
+    ...req.query,
+    ...req.body,
+    ...req.params,
+  };
+  return data;
+};
+
+export const validationMiddleware = (
   type: any,
-  value: string | "body" | "query" | "params",
   skipMissingProperties = false,
   whitelist = true,
   forbidNonWhitelisted = true
 ): RequestHandler => {
   return (req, res, next) => {
-    validate(plainToClass(type, req[value]), {
+    const data = getDataFromRequest(req);
+
+    validate(plainToClass(type, data), {
       skipMissingProperties,
       whitelist,
       forbidNonWhitelisted,
@@ -27,5 +37,3 @@ const validationMiddleware = (
     });
   };
 };
-
-export default validationMiddleware;

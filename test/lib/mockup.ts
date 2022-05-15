@@ -24,7 +24,7 @@ export function mockUserRaw(): User {
     nick: faker.lorem.word(),
     createdAt: now,
     updatedAt: now,
-  }
+  };
 }
 
 export async function createUser(userRaw: User = mockUserRaw()): Promise<User> {
@@ -39,11 +39,13 @@ export function mockCategoryRaw(): Category {
   return {
     _id: new ObjectID().toString(),
     title: faker.lorem.word(),
-    createdAt: now
-  }
+    createdAt: now,
+  };
 }
 
-export async function createCategory(categoryRaw: Category = mockCategoryRaw()): Promise<Category> {
+export async function createCategory(
+  categoryRaw: Category = mockCategoryRaw()
+): Promise<Category> {
   const data = JSON.parse(JSON.stringify(categoryRaw));
   const category = await categoryModel.create(data);
   return category;
@@ -59,13 +61,13 @@ export function mockPostRaw(user: User, category: Category): Post {
     content: faker.lorem.paragraphs(),
     createdAt: now,
     updatedAt: now,
-  }
+  };
 }
 
 export async function createPost(postRaw: Post): Promise<Post> {
   const data = JSON.parse(JSON.stringify(postRaw));
   const post = await postModel.create(data);
-  return post
+  return post;
 }
 
 export function mockCommentRaw(user: User, post: Post): Comment {
@@ -76,7 +78,7 @@ export function mockCommentRaw(user: User, post: Post): Comment {
     postId: post._id,
     content: faker.lorem.sentence(),
     createdAt: now,
-  }
+  };
 }
 
 export async function createComment(commentRaw: Comment): Promise<Comment> {

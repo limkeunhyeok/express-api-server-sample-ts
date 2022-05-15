@@ -18,7 +18,7 @@ export function getServer() {
     new UserRoute(),
     new CategoryRoute(),
     new PostRoute(),
-    new CommentRoute()
+    new CommentRoute(),
   ]);
   return app.getServer();
 }
@@ -52,18 +52,18 @@ export function expectResponseFailed(res: Response) {
 
 export function withHeadersBy(
   headers: Headers,
-  options?: Partial<Record<keyof Headers, boolean>>,
+  options?: Partial<Record<keyof Headers, boolean>>
 ) {
   return function withHeaders(req: request.Test) {
-    return setHeaders(req, headers, options)
-  }
+    return setHeaders(req, headers, options);
+  };
 }
 
 export function getHeadersFrom(res: Response, headers: Headers = {}): Headers {
   const token = headers.token;
   return {
     token,
-  }
+  };
 }
 
 export async function fetchHeaders(req: request.SuperTest<request.Test>) {
@@ -74,7 +74,7 @@ export async function fetchHeaders(req: request.SuperTest<request.Test>) {
 export function setHeaders(
   req: request.Test,
   headers: Headers,
-  options: Partial<Record<keyof Headers, boolean>> = {},
+  options: Partial<Record<keyof Headers, boolean>> = {}
 ) {
   if (
     headers.token &&
@@ -97,7 +97,7 @@ export function getResponseData(res: Response) {
 
 export async function fetchUserTokenAndHeaders(
   req: request.SuperTest<request.Test>,
-  userRaw: User = mockUserRaw(),
+  userRaw: User = mockUserRaw()
 ) {
   await createUser(userRaw);
 
@@ -106,7 +106,7 @@ export async function fetchUserTokenAndHeaders(
 
   const params = {
     email: userRaw.email,
-    password: userRaw.password
+    password: userRaw.password,
   };
 
   const res = await withHeaders(req.post("/api/auth/signIn"))
@@ -121,4 +121,3 @@ export async function fetchUserTokenAndHeaders(
   });
   return headersWithToken;
 }
-

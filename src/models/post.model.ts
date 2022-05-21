@@ -8,8 +8,8 @@ export interface PostInfo {
 }
 
 export interface Post extends PostInfo {
-  userId: ObjectIdLike;
-  categoryId: ObjectIdLike;
+  userId: ObjectIdLike | string;
+  categoryId: ObjectIdLike | string;
   createdAt: Date;
   updatedAt: Date;
 }

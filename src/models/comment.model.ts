@@ -6,8 +6,8 @@ export interface CommentInfo {
 }
 
 export interface Comment extends CommentInfo {
-  userId: ObjectIdLike;
-  postId: ObjectIdLike;
+  userId: ObjectIdLike | string;
+  postId: ObjectIdLike | string;
   createdAt: Date;
 }
 

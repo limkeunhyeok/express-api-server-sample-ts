@@ -21,6 +21,10 @@ export interface ICategoryModel extends Model<ICategoryDocument> {
     this: ICategoryModel,
     categoryDoc: Partial<Category>
   ) => Promise<void>;
+  findOneByTitle: (
+    this: ICategoryModel,
+    title: string
+  ) => Promise<ICategoryDocument>;
   findOneByCategoryId: (
     this: ICategoryModel,
     categoryId: string
@@ -58,6 +62,13 @@ categorySchema.statics.createCategory = async function (
     updatedAt: now,
   };
   await this.create(category);
+};
+
+categorySchema.statics.findOneByTitle = async function (
+  title: string
+): Promise<ICategoryDocument> {
+  const category: ICategoryDocument = await this.findOne({ title });
+  return category;
 };
 
 categorySchema.statics.findOneByCategoryId = async function (

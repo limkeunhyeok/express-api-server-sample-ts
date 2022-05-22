@@ -1,27 +1,44 @@
-import { BadRequestException, UnauthorizedException } from "@/common/exceptions";
-import { CreatePostDto } from "@/dtos";
-import { ICategoryDocument, ICategoryModel } from "@/models/category.model";
-import { IUserDocument, IUserModel } from "@/models/user.model";
+import {
+  BadRequestException,
+  UnauthorizedException,
+} from "../../common/exceptions";
+import { CreatePostDto } from "./dto/create-post.dto";
+import { ICategoryDocument, ICategoryModel } from "../../models/category.model";
+import { IUserDocument, IUserModel } from "../../models/user.model";
 import { DeleteResult } from "mongodb";
 import { IPostDocument, IPostModel } from "../../models/post.model";
-import { DeletePostByCategoryIdDto, DeletePostByPostIdDto, DeletePostByUserIdDto } from "./dto/delete-post.dto";
-import { ReadPostByCategoryIdDto, ReadPostByPostIdDto, ReadPostByUserIdDto } from "./dto/read-post.dto";
+import {
+  DeletePostByCategoryIdDto,
+  DeletePostByPostIdDto,
+  DeletePostByUserIdDto,
+} from "./dto/delete-post.dto";
+import {
+  ReadPostByCategoryIdDto,
+  ReadPostByPostIdDto,
+  ReadPostByUserIdDto,
+} from "./dto/read-post.dto";
 import { UpdatePostDto } from "./dto/update-post.dto";
 
 export class PostService {
   constructor(
     private readonly PostModel: IPostModel,
     private readonly UserModel: IUserModel,
-    private readonly CategoryModel: ICategoryModel,
+    private readonly CategoryModel: ICategoryModel
   ) {}
 
-  async createPost({ userId, categoryId, title, content }: CreatePostDto): Promise<void> {
+  async createPost({
+    userId,
+    categoryId,
+    title,
+    content,
+  }: CreatePostDto): Promise<void> {
     const hasUser: IUserDocument = await this.UserModel.findOneByUserId(userId);
     if (!hasUser) {
       throw new BadRequestException("The user does not exists.");
     }
 
-    const hasCategory: ICategoryDocument = await this.CategoryModel.findOneByCategoryId(categoryId);
+    const hasCategory: ICategoryDocument =
+      await this.CategoryModel.findOneByCategoryId(categoryId);
     if (!hasCategory) {
       throw new BadRequestException("The category does not exists.");
     }
@@ -39,7 +56,9 @@ export class PostService {
     return posts;
   }
 
-  async findOneByPostId({ postId }: ReadPostByPostIdDto): Promise<IPostDocument> {
+  async findOneByPostId({
+    postId,
+  }: ReadPostByPostIdDto): Promise<IPostDocument> {
     const hasPost: IPostDocument = await this.PostModel.findOneByPostId(postId);
     if (!hasPost) {
       throw new BadRequestException("The post does not exists.");
@@ -48,7 +67,9 @@ export class PostService {
     return hasPost;
   }
 
-  async findByUserId({ userId }: ReadPostByUserIdDto): Promise<IPostDocument[]> {
+  async findByUserId({
+    userId,
+  }: ReadPostByUserIdDto): Promise<IPostDocument[]> {
     const hasUser: IUserDocument = await this.UserModel.findOneByUserId(userId);
     if (!hasUser) {
       throw new BadRequestException("The user does not exists.");
@@ -58,17 +79,27 @@ export class PostService {
     return posts;
   }
 
-  async findByCategoryId({ categoryId }: ReadPostByCategoryIdDto): Promise<IPostDocument[]> {
-    const hasCategory: ICategoryDocument = await this.CategoryModel.findOneByCategoryId(categoryId);
+  async findByCategoryId({
+    categoryId,
+  }: ReadPostByCategoryIdDto): Promise<IPostDocument[]> {
+    const hasCategory: ICategoryDocument =
+      await this.CategoryModel.findOneByCategoryId(categoryId);
     if (!hasCategory) {
       throw new BadRequestException("The category does not exists.");
     }
 
-    const posts: IPostDocument[] = await this.PostModel.findByCategoryId(categoryId);
+    const posts: IPostDocument[] = await this.PostModel.findByCategoryId(
+      categoryId
+    );
     return posts;
   }
 
-  async updatePost({ postId, userId, title, content }: UpdatePostDto): Promise<void> {
+  async updatePost({
+    postId,
+    userId,
+    title,
+    content,
+  }: UpdatePostDto): Promise<void> {
     const post: IPostDocument = await this.PostModel.findOneByPostId(postId);
     if (!post) {
       throw new BadRequestException("The post does not exists.");
@@ -94,12 +125,16 @@ export class PostService {
   }
 
   async deleteByUserId({ userId }: DeletePostByUserIdDto) {
-    const deleteResult: DeleteResult = await this.PostModel.deleteByUserId(userId);
+    const deleteResult: DeleteResult = await this.PostModel.deleteByUserId(
+      userId
+    );
     return deleteResult;
   }
 
   async deleteByCategoryId({ categoryId }: DeletePostByCategoryIdDto) {
-    const deleteResult: DeleteResult = await this.PostModel.deleteByCategoryId(categoryId);
+    const deleteResult: DeleteResult = await this.PostModel.deleteByCategoryId(
+      categoryId
+    );
     return deleteResult;
   }
 }

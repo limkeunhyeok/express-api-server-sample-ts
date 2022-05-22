@@ -7,10 +7,10 @@ export class ReadPostByPostIdDto {
 
 export class ReadPostByUserIdDto {
   @IsString()
-  public userId: string; 
+  public userId: string;
 }
 
 export class ReadPostByCategoryIdDto {
   @IsString()
-  public categoryId: string; 
+  public categoryId: string;
 }

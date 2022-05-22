@@ -1,9 +1,6 @@
 import { IsString } from "class-validator";
 
-export class UpdateCategoryDto {
+export class ReadCategoryByCategoryIdDto {
   @IsString()
   public categoryId: string;
-
-  @IsString()
-  public title: string;
 }
